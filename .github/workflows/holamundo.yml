@@ -1,8 +1,6 @@
 name: Hola mundo!
 
-on: [pull request, push]
-branches:
-  - trunk
+on: [pull_request, push]
 
 jobs:
   build:
