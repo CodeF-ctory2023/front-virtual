@@ -1,10 +1,14 @@
-import { ExampleComponent } from '@/components/ExampleComponent';
+import { SignIn } from '../components/SignInComponent/SignIn';
+import { NavBar } from '../components/NavbarComponent/NavBar';
 
 const Home = () => {
   return (
-    <main className='flex h-screen w-full items-center justify-center'>
-      <ExampleComponent text='Welcome to CodeF@ctory' />
-    </main>
+    <div>
+      <NavBar />
+      <main className=''>
+        <SignIn />
+      </main>
+    </div>
   );
 };
 
