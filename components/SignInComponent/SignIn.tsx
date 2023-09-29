@@ -9,15 +9,36 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Typography } from '@mui/material';
+import { useState } from 'react';
 
 
-// TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 const SignIn = () => {
+
+    const [email, setEmail] = useState('');
+    const [errorEmail, setErrorEmail] = useState(false);
+
+    //Función que recibe un Email como parámetro string y retorna true o false si el correo es válido o inválido respectivamente. 
+    const validateEmail = (email: string) => {
+        const expresionReguladora = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
+
+        return expresionReguladora.test(email);
+
+    }
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+        if (validateEmail(email)) {
+            setErrorEmail(false)
+        } else {
+            setErrorEmail(true)
+        }
+
         event.preventDefault();
     };
+
+    
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -51,6 +72,8 @@ const SignIn = () => {
                             label="Ingresa tu usuario o email"
                             name="email"
                             autoComplete="email"
+                            onChange={(e) => setEmail(e.target.value)}
+                            error={errorEmail}
                         />
                         <Typography
                             variant='h3'
