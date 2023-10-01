@@ -10,7 +10,7 @@ const Home = () => {
               <div className="pointer-events-auto relative w-screen max-w-[340px]">
                 <div className="flex h-full flex-col bg-white py-6 shadow-xl">
                   <div className="px-4 sm:px-2">
-                    <button className="h-30 w-32" onClick={() =>  window.location.href='/perfil'}>
+                    <button className="h-30 w-32" onClick={() =>  window.location.href='/info'}>
                       <div className="flex place-content-center">
                         <UserCircleIcon className="h-20 w-20" aria-hidden="true" />
                       </div>
