@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { FiMenu } from 'react-icons/fi';
-import { PencilSquareIcon, ClipboardDocumentListIcon, UserCircleIcon, IdentificationIcon, CreditCardIcon, MapPinIcon, MapIcon, QrCodeIcon, QueueListIcon, ListBulletIcon } from '@heroicons/react/24/outline'
+import { UserCircleIcon, IdentificationIcon, CreditCardIcon, MapPinIcon, MapIcon, QrCodeIcon, QueueListIcon, ListBulletIcon } from '@heroicons/react/24/outline'
 
 interface MenuToggleProps {
   menuItems: string[];

@@ -1,5 +1,4 @@
 import { CreditCardIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
-import react from "react"
 
 function Tarjetas(){
     return(

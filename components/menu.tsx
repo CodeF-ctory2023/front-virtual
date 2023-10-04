@@ -1,9 +1,9 @@
 import React from 'react';
-import { PencilSquareIcon, ClipboardDocumentListIcon, UserCircleIcon, IdentificationIcon, CreditCardIcon, MapPinIcon, MapIcon } from '@heroicons/react/24/outline'
+import { UserCircleIcon, IdentificationIcon, CreditCardIcon, MapPinIcon, MapIcon } from '@heroicons/react/24/outline'
 
 function Menu(){
     return (
-        <div className="w-auto grid  sm:grid-flow-col gap-3 hidden md:block ">
+        <div className="w-auto sm:grid-flow-col gap-3 hidden md:block ">
                 <div className="flex h-full flex-col bg-white py-6 shadow-xl">
                   <div className="px-4 sm:px-2 ">
                     <div className="h-32 w-32">
