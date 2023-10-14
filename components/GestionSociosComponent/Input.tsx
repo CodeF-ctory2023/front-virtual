@@ -1,6 +1,3 @@
-import { IconType } from 'react-icons';
-import {HiIdentification} from 'react-icons/hi2'
-
 interface InputProps{
     placeHolder: string;
 }
