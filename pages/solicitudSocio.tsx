@@ -1,5 +1,5 @@
 import React from 'react';
-import Tabla from '@/components/GestionSociosComponent/table';
+import {TablaGestionSocios} from '@/components/GestionSociosComponent/table';
 
 const data = [
   {
@@ -31,7 +31,7 @@ const secondPage: React.FC = () => {
         </h1>
       </div>
       <div className="p-2">
-        <Tabla data={data} />
+        <TablaGestionSocios data={data} />
       </div>
     </div>
   );

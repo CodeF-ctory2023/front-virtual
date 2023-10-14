@@ -77,7 +77,7 @@ const TablaGestionSocios: React.FC<Props> = ({ data }) => {
   );
 };
 
-export { TablaGestionSocios };
+export {TablaGestionSocios};
 
 /*<ButtonSocios
 color="#6662D9"
