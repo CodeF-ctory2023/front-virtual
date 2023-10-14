@@ -1,16 +1,15 @@
 import { Input } from '@/components/GestionSociosComponent/Input';
 import { HiIdentification } from 'react-icons/hi2'
-import { BsFillPersonFill } from 'react-icons/bs'
+import { BsFillPersonFill, BsFillPlusCircleFill} from 'react-icons/bs'
 import { MdEmail } from 'react-icons/md'
 import { FaPhoneSquareAlt } from 'react-icons/fa'
-import { BsFillPlusCircleFill } from 'react-icons/bs'
 import { MainButtonSocio } from '@/components/GestionSociosComponent/MainButtonSocio';
 
 const RegistroSocio = () => {
     return (
         <div className='flex h-screen'>
             <div className='w-[35%] bg-[#F2F2F2]'>
-                <img src="/images/ssmu.png" alt="image registro" />
+                <img src="/images/ssmu.png" alt="registro" />
             </div>
             <div className='w-[65%]'>
                 <div className="flex items-center justify-center bg-blue-socio p-10">
