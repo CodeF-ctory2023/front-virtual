@@ -1,10 +1,9 @@
-import { Input } from '@/components/GestionSociosComponent/Input';
 import { HiIdentification } from 'react-icons/hi2'
-import { BsFillPersonFill, BsFillPlusCircleFill } from 'react-icons/bs'
+import { BsFillPersonFill } from 'react-icons/bs'
 import { MdEmail, MdLocationCity } from 'react-icons/md'
 import { FaPhoneSquareAlt } from 'react-icons/fa'
 import { ButtonSocios } from '@/components/GestionSociosComponent/ButtonSocios';
-import Dialog from '@/components/GestionSociosComponent/dialog';
+import { Dialog } from '@/components/GestionSociosComponent/dialog';
 
 const nombreSocio: React.FC = () => {
   return (

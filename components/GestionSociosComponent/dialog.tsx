@@ -40,7 +40,7 @@ const Dialog = ({ dialogo }: InputDialog) => {
     </div>
   );
 }
-export default Dialog;
+export {Dialog};
 
 
 
