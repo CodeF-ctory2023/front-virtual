@@ -3,34 +3,32 @@ import {TablaGestionSocios} from '@/components/GestionSociosComponent/table';
 
 const data = [
   {
-    title1: '####',
-    title2: 'xxxxxx',
-    title3: '####',
-    title4: '',
-    title5: 'P.Judicial',
-    title6: 'ACEPTADO',
-    title7: ''
+    cedula: '111',
+    name: 'xxxxxx',
+    telefono: '####',
+    licencia: '',
+    pasJudicial: 'P.Judicial',
+    estado: 'ACEPTADO'
   },
   {
-    title1: '####',
-    title2: '----',
-    title3: '####',
-    title4: '',
-    title5: 'P.Judicial',
-    title6: 'rechazado',
-    title7: ''
+    cedula: '112',
+    name: 'xxxxxx',
+    telefono: '####',
+    licencia: '',
+    pasJudicial: 'P.Judicial',
+    estado: 'rechazado'
   },
 ];
 
 const secondPage: React.FC = () => {
   return (
     <div>
-      <div className="flex items-center justify-center bg-blue-socio p-2 rounded-sm">
-        <h1 className="text-white text-center font-semibold">
+      <div className="flex items-center justify-center bg-blue-socio p-4 rounded-sm">
+        <h1 className="text-[35px] text-white text-center font-semibold">
           Solicitud de Socios
         </h1>
       </div>
-      <div className="p-2">
+      <div className="p-4">
         <TablaGestionSocios data={data} />
       </div>
     </div>
