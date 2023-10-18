@@ -2,8 +2,13 @@ import { XCircleIcon, ArrowRightOnRectangleIcon } from '@heroicons/react/24/outl
 import { UserCircleIcon } from '@heroicons/react/24/solid'
 import * as React from 'react';
 import Overlay from '../components/Overlays/overlay';
-import Notification from '../components/Overlays/notification';
+import {Notification} from '@/components/Overlays/notification';
+import { Dispatch, SetStateAction } from 'react';
 
+interface RegistroProps{
+    isOpen:boolean;
+    setIsOpen:Dispatch<SetStateAction<boolean>>;
+}
 const Home = () =>{
     const [error, setError] = React.useState(String);
     const [isOpen, setIsOpen] = React.useState(false);
@@ -19,7 +24,7 @@ const Home = () =>{
 return(
     <div>
         <Overlay isOpen={isOpen} setIsOpen={setIsOpen} onClose={toggleOverlay}>
-            <Notification title={error === "Robin Hood" ? "Registro Fallido" : "Registro Exitoso"} description={error === "Robin Hood" ? 'El usuario ya existe o no ha podido ser registrado' : 'El usuario se ha registrado exitosamente'} isOpen={isOpen} setIsOpen={setIsOpen} onClose={toggleOverlay}>
+            <Notification title={error === "Robin Hood" ? "Registro Fallido" : "Registro Exitoso"} description={error === "Robin Hood" ? 'El usuario ya existe o no ha podido ser registrado' : 'El usuario se ha registrado exitosamente'} isOpen={isOpen}  setIsOpen={setIsOpen} onClose={toggleOverlay}>
                 <UserCircleIcon color={error === "Robin Hood" ? 'red' : 'green'} className='ml-1 h-12 w-12'/>
             </Notification>
         </Overlay>
