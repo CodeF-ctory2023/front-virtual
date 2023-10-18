@@ -11,7 +11,7 @@ const ButtonSocios: React.FC<Props> = ({
     onClick, 
   }) => { 
     return (
-        <button className="w-[65px] h-5 bg-white text-black rounded-full px-3 py-1 font-semibold hover:scale-105"
+        <button className="w-[83px] h-9 bg-white text-black rounded-full px-3 py-2 font-semibold hover:scale-105"
           onClick={onClick}
           style={{
              backgroundColor: color,
