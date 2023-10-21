@@ -1,20 +1,21 @@
-name: CI/CD
-
+name: Continuous Deployment
 on:
-  pull_request:
-    branches:
-      - trunk
   push:
     branches:
       - trunk
 
 jobs:
-  lint:
-    name: Lint
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Install dependencies
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node Setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      - name: Depencencies Install
         run: npm i
       - name: Lint
         run: npm run lint
@@ -30,3 +31,5 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       - name: S3 Synchronization
         run: aws s3 sync ./out/ s3://${{ secrets.S3_BUCKET }}/ --delete
+      - name: CloudFront cache invalidation
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
