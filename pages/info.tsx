@@ -1,6 +1,31 @@
 import { PencilSquareIcon, ClipboardDocumentListIcon } from '@heroicons/react/24/outline'
 import Menu from'../components/menu';
+import { changeUserInfo } from '@/services/user.services';
+import { useState } from 'react';
+
 const Home = () =>{
+
+    const [userInfo, setUserInfo] = useState({
+        firstNames: "",
+        lastNames: "",
+        id: "",
+        email: ""
+    })
+
+    function handleOnChange(e: any) {
+        setUserInfo({
+            ...userInfo,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleOnclick = async () => {
+        try {
+            const response = await changeUserInfo(userInfo)
+        } catch (error) {
+            console.log("Error: ", error)
+        }
+    }
 
     return (
         <div className=' fixed inset-y-0 left-0 flex max-w-full '>
@@ -23,7 +48,7 @@ const Home = () =>{
                                     <label className="block text-gray-700 text-lg font-bold mb-2">Nombres  </label>
                                 </div>
                                 <div className='sm:col-span-4 justify-center '>
-                                    <input size={50} type="text" className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' placeholder='nombre ' />
+                                    <input size={50} onChange={handleOnChange} type="text" value={userInfo.firstNames} name="firstNames" className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' placeholder='nombre ' />
                                 </div>
 
                             </div>
@@ -35,7 +60,7 @@ const Home = () =>{
                                     <label className="block text-gray-700 text-lg font-bold mb-2">Apellidos</label>
                                 </div>
                                 <div className='sm:col-span-4 justify-center '>
-                                    <input size={50} type="text" className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' placeholder='apellido ' />
+                                    <input size={50} onChange={handleOnChange} type="text" value={userInfo.lastNames} name="lastNames" className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' placeholder='apellido ' />
                                 </div>
                             </div>
                         </div>
@@ -45,7 +70,7 @@ const Home = () =>{
                                     <label className="block text-gray-700 text-lg font-bold mb-2">Identificacion</label>
                                 </div>
                                 <div className='sm:col-span-4 justify-center '>
-                                    <input size={50} type="text" className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ' placeholder='documento' />
+                                    <input size={50} onChange={handleOnChange} type="text" value={userInfo.id} name="id" className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ' placeholder='documento' />
                                 </div>
                             </div>
                         </div>
@@ -55,7 +80,7 @@ const Home = () =>{
                                     <label className="block text-gray-700 text-lg font-bold mb-2">Correo</label>
                                 </div>
                                 <div className='sm:col-span-4 justify-center '>
-                                    <input size={50} type="text" className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ' placeholder='correo ' />
+                                    <input size={50} onChange={handleOnChange} type="text" value={userInfo.email} name="email" className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ' placeholder='correo ' />
                                 </div>
                             </div>
                         </div>
