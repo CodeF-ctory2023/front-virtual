@@ -1,5 +1,5 @@
 import { PencilSquareIcon, ClipboardDocumentListIcon, UserCircleIcon, IdentificationIcon, CreditCardIcon, MapPinIcon, MapIcon } from '@heroicons/react/24/outline'
-import Menu from '../components/menu';
+import {Menu} from '@/components/menu';
 const Home = () => {
 
     return (

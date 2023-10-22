@@ -1,6 +1,16 @@
 import { Fragment, MouseEventHandler } from "react";
 
-export function Overlay({ isOpen, setIsOpen, children, title, description }: {isOpen: boolean, setIsOpen: CallableFunction ,onClose: MouseEventHandler, children: any, title: string, description: string}) {
+/*  export function Overlay({ isOpen, setIsOpen, children, title, description }: {isOpen: boolean, setIsOpen: CallableFunction ,onClose: MouseEventHandler, children: any, title: string, description: string}) */
+interface NotificationProps{
+  title: String;
+  description: String;
+  isOpen: boolean;
+  setIsOpen: CallableFunction;
+  children: React.ReactNode;
+  onClose: MouseEventHandler;  
+}
+
+const Notification=({title,description,isOpen,setIsOpen,children,onClose}:NotificationProps)=>{
     return (
         <Fragment>
             {isOpen && (
@@ -22,4 +32,4 @@ export function Overlay({ isOpen, setIsOpen, children, title, description }: {is
     );
 }
 
-export default Overlay;
+export default Notification;
