@@ -1,7 +1,7 @@
 import { Input } from '@/components/GestionSociosComponent/Input';
 import { HiIdentification } from 'react-icons/hi2'
-import { BsFillPersonFill, BsFillPlusCircleFill} from 'react-icons/bs'
-import { MdEmail } from 'react-icons/md'
+import { BsFillPersonFill, BsFillPlusCircleFill } from 'react-icons/bs'
+import { MdEmail, MdLocationCity } from 'react-icons/md'
 import { FaPhoneSquareAlt } from 'react-icons/fa'
 import { MainButtonSocio } from '@/components/GestionSociosComponent/MainButtonSocio';
 
@@ -34,6 +34,14 @@ const RegistroSocio = () => {
                     <div className='flex w-2/4 items-center'>
                         <FaPhoneSquareAlt className="mr-3 text-3xl text-green-socio" />
                         <Input placeHolder='Teléfono' />
+                    </div>
+                    <div className='flex w-2/4 items-center'>
+                        <FaPhoneSquareAlt className="mr-3 text-3xl text-green-socio" />
+                        <Input placeHolder='Teléfono' />
+                    </div>
+                    <div className='flex w-2/4 items-center'>
+                        <MdLocationCity className="mr-3 text-3xl text-green-socio" />
+                        <Input placeHolder='Ciudad del servicio' />
                     </div>
                     <div className='mt-5'>
                         <MainButtonSocio name='Consultar Pasado Judicial' color='#6662D9' onClick={() => { }} />
