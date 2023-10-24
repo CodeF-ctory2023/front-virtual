@@ -2,30 +2,74 @@ import { XCircleIcon, ArrowRightOnRectangleIcon } from '@heroicons/react/24/outl
 import { UserCircleIcon } from '@heroicons/react/24/solid'
 import * as React from 'react';
 import Overlay from '../components/Overlays/overlay';
-import {Notification} from '@/components/Overlays/notification';
-import { Dispatch, SetStateAction } from 'react';
+import Notification from '../components/Overlays/notification';
+import { registerUser } from '../services/user.services';
 
-interface RegistroProps{
-    isOpen:boolean;
-    setIsOpen:Dispatch<SetStateAction<boolean>>;
-}
 const Home = () =>{
-    const [error, setError] = React.useState(String);
+    const emailregex = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+    const [error, setError] = React.useState(false);
     const [isOpen, setIsOpen] = React.useState(false);
+
+    const [userReg, setUserReg] = React.useState({
+        name: "",
+        lastName: "",
+        idDocument: "",
+        email: "",
+        password: ""
+    })
+
+    const [veriPassword, setVeriPassword] = React.useState(String)
+
+    function handleOnChange(e: any) {
+        const numregex = /^$|^[0-9]*$/;
+        const regex = /^(?=(?:[^0-9]*[0-9]){0,3}[^0-9]*$)(?=(?:[0-9]*[^0-9]){0,3}[0-9]*$)[a-zA-Z0-9]{0,6}$/;
+        if (e.target.name == "password" && !regex.test(e.target.value) ||
+            e.target.name == "veriPassword" && !regex.test(e.target.value) ||
+            e.target.name == "id" && !numregex.test(e.target.value)) {
+            return
+        }
+        if (e.target.name == "veriPassword")  {
+            setVeriPassword(e.target.value)
+            return
+        }
+        else {
+            setUserReg({
+                ...userReg,
+                [e.target.name]: e.target.value
+            })
+        }
+    }
+
+    const handleRegister = async () => {
+        if (veriPassword != userReg.password) {
+            setError(true);
+            return
+        }
+        if (!emailregex.test(userReg.email)) {
+            return
+        }
+        try {
+            const response = await registerUser(userReg)
+            if (response == "") {
+                setError(true);
+                toggleOverlay()
+            }
+            setError(false);
+            toggleOverlay()
+        } catch (error) {
+            console.log("Error: ", error)
+        }
+    }
     
     const toggleOverlay = () => {
         setIsOpen(!isOpen);
     };
 
-    const handleTest = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setError(e.target.value);
-    };
-
 return(
     <div>
         <Overlay isOpen={isOpen} setIsOpen={setIsOpen} onClose={toggleOverlay}>
-            <Notification title={error === "Robin Hood" ? "Registro Fallido" : "Registro Exitoso"} description={error === "Robin Hood" ? 'El usuario ya existe o no ha podido ser registrado' : 'El usuario se ha registrado exitosamente'} isOpen={isOpen}  setIsOpen={setIsOpen} onClose={toggleOverlay}>
-                <UserCircleIcon color={error === "Robin Hood" ? 'red' : 'green'} className='ml-1 h-12 w-12'/>
+            <Notification title={error === true ? "Registro Fallido" : "Registro Exitoso"} description={error === true ? 'El usuario ya existe o no ha podido ser registrado' : 'El usuario se ha registrado exitosamente'} isOpen={isOpen} setIsOpen={setIsOpen} onClose={toggleOverlay}>
+                <UserCircleIcon color={error === true ? 'red' : 'green'} className='ml-1 h-12 w-12'/>
             </Notification>
         </Overlay>
         <div className=" top-0 bottom-0 right-0 left-0 m-auto w-fit flex flex-row">
@@ -42,42 +86,45 @@ return(
                         <div className=' mb-4 '>
                             <div className=' grid grid-flow-row sm:grid-flow-col gap-3 '>
                                 <div className='sm:col-span-4 justify-center '>
-                                    <input size={50} type="text" onChange={handleTest} className='shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'placeholder='Nombres' />
+                                    <input size={50} onChange={handleOnChange} type="text" value={userReg.name} name="name" className='shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'placeholder='Nombres' />
                                 </div>
                             </div>
                         </div>
                     <div className=' mb-4 '>
                         <div className=' grid grid-flow-row sm:grid-flow-col gap-3'>
                             <div className='sm:col-span-4 justify-center '>
-                                <input size={50} type="text" className='shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'placeholder='Apellidos' />
+                                <input size={50} onChange={handleOnChange} type="text" value={userReg.lastName} name="lastName" className='shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'placeholder='Apellidos' />
                             </div>
                         </div>
                     </div>
                     <div className=' mb-4 '>        
                         <div className=' grid grid-flow-row sm:grid-flow-col gap-3'>
                             <div className='sm:col-span-4 justify-center '>
-                                <input size={50} type="text" className='shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'placeholder='Documento' />
+                                <input size={50} onChange={handleOnChange} type="text" value={userReg.idDocument} name="idDocument" className='shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'placeholder='Documento' />
                             </div>
                         </div>
                     </div>
                     <div className=' mb-4 '>        
                         <div className=' grid grid-flow-row sm:grid-flow-col gap-3'>
                             <div className='sm:col-span-4 justify-center '>
-                                <input size={50} type="text" className='shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'placeholder='Email' />
+                                <input size={50} onChange={handleOnChange} type="email" value={userReg.email} name="email" className={!emailregex.test(userReg.email) === true ? 'shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-red-700 dark:text-red-500 bg-sky-200 leading-tight focus:outline-none focus:shadow-outline' : 'shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'} placeholder='Email' />
                             </div>
+                        </div>
+                    </div>
+                    <div className='mb-2 '>        
+                        <div className=' grid grid-flow-row sm:grid-flow-col gap-3'>
+                            <div className='sm:col-span-4 justify-center '>
+                                <input size={50} onChange={handleOnChange} type="password" value={userReg.password} name="password" className={error === true ? 'shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-red-700 dark:text-red-500 bg-sky-200 leading-tight focus:outline-none focus:shadow-outline' : 'shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'} placeholder='Contraseña' />
+                            </div>
+                        </div>
+                        <div className="text-xs text-gray-500">
+                            Porfavor ingrese una contraseña que contenga 3 numeros y 3 caracteres
                         </div>
                     </div>
                     <div className=' mb-4 '>        
                         <div className=' grid grid-flow-row sm:grid-flow-col gap-3'>
                             <div className='sm:col-span-4 justify-center '>
-                                <input size={50} type="text" className='shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'placeholder='Contraseña' />
-                            </div>
-                        </div>
-                    </div>
-                    <div className=' mb-4 '>        
-                        <div className=' grid grid-flow-row sm:grid-flow-col gap-3'>
-                            <div className='sm:col-span-4 justify-center '>
-                                <input size={50} type="text" className='shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'placeholder='Repita la Contraseña' />
+                                <input size={50} onChange={handleOnChange} type="password" value={veriPassword} name="veriPassword" className={error === true ? 'shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-red-700 dark:text-red-500 bg-sky-200 leading-tight focus:outline-none focus:shadow-outline' : 'shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'} placeholder='Repita la Contraseña' />
                             </div>
                         </div>
                     </div>
@@ -88,7 +135,7 @@ return(
                                 Cancel
                             </div>
                         </button>
-                        <button type="button" className="flex gap-1 " onClick={toggleOverlay}>
+                        <button type="button" className="flex gap-1 " onClick={handleRegister}>
                             <ArrowRightOnRectangleIcon className="ml-1 h-10 w-10" aria-hidden="true" />
                             <div className="mt-2">
                                 Registrar
