@@ -3,7 +3,7 @@ interface ListadoSociosProps {
   nombre: string;
   telefono: number;
   licenciaConducir: string;
-  pjudicial: boolean;
+  pasadoJudicial: string;
   estadoVerificacion: string;
 }
 export const ListadoSocios = ({
@@ -11,7 +11,7 @@ export const ListadoSocios = ({
   nombre,
   telefono,
   licenciaConducir,
-  pjudicial,
+  pasadoJudicial,
   estadoVerificacion }: ListadoSociosProps) => {
   return (
     <tbody>
@@ -29,7 +29,7 @@ export const ListadoSocios = ({
           {licenciaConducir}
         </td>
         <td className="px-6 py-4 whitespace-no-wrap">
-          {pjudicial}
+          {pasadoJudicial}
         </td>
         <td className="px-6 py-4 whitespace-no-wrap">
           {estadoVerificacion}
