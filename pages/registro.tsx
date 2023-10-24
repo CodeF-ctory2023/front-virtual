@@ -6,13 +6,14 @@ import Notification from '../components/Overlays/notification';
 import { registerUser } from '../services/user.services';
 
 const Home = () =>{
+    const emailregex = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
     const [error, setError] = React.useState(false);
     const [isOpen, setIsOpen] = React.useState(false);
 
     const [userReg, setUserReg] = React.useState({
-        firstNames: "",
-        lastNames: "",
-        id: "",
+        name: "",
+        lastName: "",
+        idDocument: "",
         email: "",
         password: ""
     })
@@ -20,11 +21,11 @@ const Home = () =>{
     const [veriPassword, setVeriPassword] = React.useState(String)
 
     function handleOnChange(e: any) {
-        const num = /^$|^[0-9]*$/;
-        const reg = /^(?=(?:[^0-9]*[0-9]){0,3}[^0-9]*$)(?=(?:[0-9]*[^0-9]){0,3}[0-9]*$)[a-zA-Z0-9]{0,6}$/;
-        if (e.target.name == "password" && !reg.test(e.target.value) || 
-            e.target.name == "veriPassword" && !reg.test(e.target.value) ||
-            e.target.name == "id" && !num.test(e.target.value)) {
+        const numregex = /^$|^[0-9]*$/;
+        const regex = /^(?=(?:[^0-9]*[0-9]){0,3}[^0-9]*$)(?=(?:[0-9]*[^0-9]){0,3}[0-9]*$)[a-zA-Z0-9]{0,6}$/;
+        if (e.target.name == "password" && !regex.test(e.target.value) ||
+            e.target.name == "veriPassword" && !regex.test(e.target.value) ||
+            e.target.name == "id" && !numregex.test(e.target.value)) {
             return
         }
         if (e.target.name == "veriPassword")  {
@@ -44,8 +45,17 @@ const Home = () =>{
             setError(true);
             return
         }
+        if (!emailregex.test(userReg.email)) {
+            return
+        }
         try {
             const response = await registerUser(userReg)
+            if (response == "") {
+                setError(true);
+                toggleOverlay()
+            }
+            setError(false);
+            toggleOverlay()
         } catch (error) {
             console.log("Error: ", error)
         }
@@ -76,28 +86,28 @@ return(
                         <div className=' mb-4 '>
                             <div className=' grid grid-flow-row sm:grid-flow-col gap-3 '>
                                 <div className='sm:col-span-4 justify-center '>
-                                    <input size={50} onChange={handleOnChange} type="text" value={userReg.firstNames} name="firstNames" className='shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'placeholder='Nombres' />
+                                    <input size={50} onChange={handleOnChange} type="text" value={userReg.name} name="name" className='shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'placeholder='Nombres' />
                                 </div>
                             </div>
                         </div>
                     <div className=' mb-4 '>
                         <div className=' grid grid-flow-row sm:grid-flow-col gap-3'>
                             <div className='sm:col-span-4 justify-center '>
-                                <input size={50} onChange={handleOnChange} type="text" value={userReg.lastNames} name="lastNames" className='shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'placeholder='Apellidos' />
+                                <input size={50} onChange={handleOnChange} type="text" value={userReg.lastName} name="lastName" className='shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'placeholder='Apellidos' />
                             </div>
                         </div>
                     </div>
                     <div className=' mb-4 '>        
                         <div className=' grid grid-flow-row sm:grid-flow-col gap-3'>
                             <div className='sm:col-span-4 justify-center '>
-                                <input size={50} onChange={handleOnChange} type="text" value={userReg.id} name="id" className='shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'placeholder='Documento' />
+                                <input size={50} onChange={handleOnChange} type="text" value={userReg.idDocument} name="idDocument" className='shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'placeholder='Documento' />
                             </div>
                         </div>
                     </div>
                     <div className=' mb-4 '>        
                         <div className=' grid grid-flow-row sm:grid-flow-col gap-3'>
                             <div className='sm:col-span-4 justify-center '>
-                                <input size={50} onChange={handleOnChange} type="text" value={userReg.email} name="email" className='shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'placeholder='Email' />
+                                <input size={50} onChange={handleOnChange} type="email" value={userReg.email} name="email" className={!emailregex.test(userReg.email) === true ? 'shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-red-700 dark:text-red-500 bg-sky-200 leading-tight focus:outline-none focus:shadow-outline' : 'shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'} placeholder='Email' />
                             </div>
                         </div>
                     </div>
