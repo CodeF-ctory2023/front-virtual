@@ -56,7 +56,7 @@ const Pagos = () => {
                 <div className=' w-18 h-60 mt-16  mr-6 text-lg font-semibold leading-6 '>
                   <button
                     className='flex gap-1 '
-                    onClick={() => (window.location.href = '/AgregarTarjetas')}
+                    onClick={() => (window.location.href = '/agregar-tarjetas')}
                   >
                     <PlusIcon className='h-10' aria-hidden='true' />
                     <div className='mt-3'>Agregar Tarjeta</div>
