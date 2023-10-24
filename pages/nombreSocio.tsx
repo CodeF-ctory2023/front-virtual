@@ -1,11 +1,18 @@
-import { HiIdentification } from 'react-icons/hi2'
-import { BsFillPersonFill } from 'react-icons/bs'
-import { MdEmail, MdLocationCity } from 'react-icons/md'
-import { FaPhoneSquareAlt } from 'react-icons/fa'
+import { HiIdentification } from 'react-icons/hi2';
+import { BsFillPersonFill } from 'react-icons/bs';
+import { MdEmail, MdLocationCity } from 'react-icons/md';
+import { FaPhoneSquareAlt } from 'react-icons/fa';
 import { ButtonSocios } from '@/components/GestionSociosComponent/ButtonSocios';
 import { Dialog } from '@/components/GestionSociosComponent/dialog';
+import { useFetchSocios } from '@/hooks/useFetchSocios';
+
+
 
 const nombreSocio: React.FC = () => {
+
+  const { newSocios } = useFetchSocios();
+  console.log(newSocios);
+
   return (
     <div className='bg-[#F2F2F2]'>
       <div className="flex items-center justify-center bg-blue-socio p-4 rounded-sm">
@@ -32,6 +39,7 @@ const nombreSocio: React.FC = () => {
               <div className="relative w-[110%]">
                 <input type="text" id="cedula" className="border-solid border-2 border-neutral-200" disabled={true} />
                 <label htmlFor="cedula" className="absolute top-0 left-2 -mt-2 text-black-600 px-1 ">Cédula</label>
+                {/* <p>{newSocios}</p> */}
               </div>
             </div>
             <div className='flex w-[160%]'>
@@ -39,6 +47,7 @@ const nombreSocio: React.FC = () => {
               <div className="relative w-[110%]">
                 <input type="text" id="name" className="border-solid border-2 border-neutral-200" disabled={true} />
                 <label htmlFor="name" className="absolute top-0 left-2 -mt-2 text-black-600 px-1 ">Nombre</label>
+                {/* <p>{newSocios.nombre}</p> */}
               </div>
             </div>
             <div className='flex w-[160%]'>
@@ -46,6 +55,7 @@ const nombreSocio: React.FC = () => {
               <div className="relative w-[110%]">
                 <input type="text" id="cedula" className="border-solid border-2 border-neutral-200" disabled={true} />
                 <label htmlFor="cedula" className="absolute top-0 left-2 -mt-2 text-black-600 px-1 ">Correo electrónico</label>
+                {/* <p>{newSocios.correo}</p> */}
               </div>
             </div>
             <div className='flex w-[160%]'>
@@ -53,6 +63,7 @@ const nombreSocio: React.FC = () => {
               <div className="relative w-[110%]">
                 <input type="text" id="cedula" className="border-solid border-2 border-neutral-200" disabled={true} />
                 <label htmlFor="cedula" className="absolute top-0 left-2 -mt-2 text-black-600 px-1 ">Teléfono</label>
+                {/* <p>{newSocios.telefono}</p> */}
               </div>
             </div>
             <div className='flex w-[160%]'>
@@ -60,6 +71,7 @@ const nombreSocio: React.FC = () => {
               <div className="relative w-[110%]">
                 <input type="text" id="cedula" className="border-solid border-2 border-neutral-200" disabled={true} />
                 <label htmlFor="cedula" className="absolute top-0 left-2 -mt-2 text-black-600 px-1 ">Ciudad de Servicio</label>
+                {/* <p>{newSocios.ciudad_de_servicio}</p> */}
               </div>
             </div>
           </div>

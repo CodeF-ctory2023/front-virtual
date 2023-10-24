@@ -1,23 +1,23 @@
 interface ListadoSociosProps {
-  cedula: number;
+  documentoIdentidad: number;
   nombre: string;
   telefono: number;
-  licencia: string;
+  licenciaConducir: string;
   pjudicial: boolean;
-  estado: string;
+  estadoVerificacion: string;
 }
 export const ListadoSocios = ({
-  cedula,
+  documentoIdentidad,
   nombre,
   telefono,
-  licencia,
+  licenciaConducir,
   pjudicial,
-  estado }: ListadoSociosProps) => {
+  estadoVerificacion }: ListadoSociosProps) => {
   return (
     <tbody>
       <tr className="even:bg-gray-100">
         <td className="px-6 py-4 whitespace-no-wrap">
-          {cedula}
+          {documentoIdentidad}
         </td>
         <td className="px-6 py-4 whitespace-no-wrap">
           {nombre}
@@ -26,13 +26,13 @@ export const ListadoSocios = ({
           {telefono}
         </td>
         <td className="px-6 py-4 whitespace-no-wrap">
-          {licencia}
+          {licenciaConducir}
         </td>
         <td className="px-6 py-4 whitespace-no-wrap">
           {pjudicial}
         </td>
         <td className="px-6 py-4 whitespace-no-wrap">
-          {estado}
+          {estadoVerificacion}
         </td>
         <td className="px-6 py-4 whitespace-no-wrap">
           <button

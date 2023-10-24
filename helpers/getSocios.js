@@ -1,8 +1,8 @@
 export const getSocios = async() => {
 
-    const url = 'https://demo5024142.mockable.io/socios';
+    const url = 'http://localhost:8081/api/socio/find-all';
     const resp = await fetch( url );
-    const { socios } = await resp.json();
+    const socios = await resp.json();
 
     return socios;
 }

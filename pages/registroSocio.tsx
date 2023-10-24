@@ -10,26 +10,28 @@ import { FaPhoneSquareAlt } from 'react-icons/fa';
 //Componentes
 import { MainButtonSocio } from '@/components/GestionSociosComponent/MainButtonSocio';
 
+import { postSocios } from '@/helpers/postSocios';
+
 interface RegistroSocioProps {
-    numeroCedula: string;
+    documentoIdentidad: string;
     nombre: string;
-    correo: string;
+    correoElectronico: string;
     telefono: number;
 
     /* onChange: (event: React.ChangeEvent<HTMLInputElement>) => void; */
 }
 
-const RegistroSocio = ({ numeroCedula, nombre, correo, telefono }: RegistroSocioProps) => {
+const RegistroSocio = ({ documentoIdentidad, nombre, correoElectronico, telefono }: RegistroSocioProps) => {
     const { onResetForm, onInputChange, formState } = useFormInput({
-        numeroCedula: '',
         nombre: '',
-        correo: '',
+        correoElectronico: '',
         telefono: null,
+        documentoIdentidad: '',
     });
 
     const onsubmitForm = (event: { preventDefault: () => void; }) => {
         event.preventDefault();
-        console.log(formState);
+        postSocios(formState);
         onResetForm();
     };
 
@@ -50,8 +52,8 @@ const RegistroSocio = ({ numeroCedula, nombre, correo, telefono }: RegistroSocio
                         <HiIdentification className="mr-3 text-3xl text-green-socio" />
                         <input
                             placeholder='Numero de cédula'
-                            name='numeroCedula'
-                            value={numeroCedula}
+                            name='documentoIdentidad'
+                            value={documentoIdentidad}
                             onChange={onInputChange}
                         />
                     </div>
@@ -68,8 +70,8 @@ const RegistroSocio = ({ numeroCedula, nombre, correo, telefono }: RegistroSocio
                         <MdEmail className="mr-3 text-3xl text-green-socio" />
                         <input
                             placeholder='Correo'
-                            name='correo'
-                            value={correo}
+                            name='correoElectronico'
+                            value={correoElectronico}
                             onChange={onInputChange}
                         />
                     </div>
@@ -82,9 +84,9 @@ const RegistroSocio = ({ numeroCedula, nombre, correo, telefono }: RegistroSocio
                             onChange={onInputChange}
                         />
                     </div>
-                    <div className='mt-5'>
+                    {/* <div className='mt-5'>
                         <MainButtonSocio name='Consultar Pasado Judicial' color='#6662D9' onClick={() => { }} />
-                    </div>
+                    </div> */}
                     <div className='flex flex-wrap gap-4 mt-4'>
                         <div className='flex items-center'>
                             <strong className='text-xl'>Pasado Judicial</strong>

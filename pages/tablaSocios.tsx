@@ -2,7 +2,7 @@ import React from 'react';
 import { ListadoSocios } from '@/components/GestionSociosComponent/ListadoSocios';
 import { useFetchSocios } from '@/hooks/useFetchSocios';
 
-const TablaSocios: React.FC = () => {
+const tablaSocios: React.FC = () => {
   const { socios, isLoading } = useFetchSocios();
 
   return (
@@ -48,4 +48,4 @@ const TablaSocios: React.FC = () => {
   );
 };
 
-export default TablaSocios;
+export default tablaSocios;
