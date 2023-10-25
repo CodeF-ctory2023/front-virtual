@@ -1,27 +1,31 @@
 import { userApi } from "@/api/userApi"
+import { userList } from "@/data-test/data"
+import { Users } from "@/interfaces/user.interfaces"
 
 
-export const changeUserInfo = async (userInfo: UserInfo) => {
+export const changeUserInfo = async (userInfo: Users) => {
 
     try{
-        const response = await userApi.post(
+        /* const response = await userApi.post(
             'Post URL',
             userInfo
-        )
-        return response.data
+        ) */
+        const response = userList[0]
+        return response
     }catch(e){
         throw e
     }
 }
 
-export const registerUser = async (newUser: NewUser) => {
+export const registerUser = async (newUser: Users) => {
 
     try{
-        const response = await userApi.post(
+        /* const response = await userApi.post(
             'Post URL',
-            newUser
-        )
-        return response.data
+            newUser 
+        )*/
+        const response = userList[1]
+        return response
     }catch(e){
         throw e
     }

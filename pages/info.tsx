@@ -5,10 +5,11 @@ import { useState } from 'react';
 const Home = () => {
 
     const [userInfo, setUserInfo] = useState({
-        firstNames: "",
-        lastNames: "",
-        id: "",
-        email: ""
+        firstName: "",
+        lastName: "",
+        document: 0,
+        email: "",
+        password: ""
     })
 
     function handleOnChange(e: any) {
@@ -46,7 +47,7 @@ const Home = () => {
                                     <label className="block text-gray-700 text-lg font-bold mb-2">Nombres  </label>
                                 </div>
                                 <div className='sm:col-span-4 justify-center '>
-                                    <input size={50} onChange={handleOnChange} type="text" value={userInfo.firstNames} name="firstNames" className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' placeholder='nombre ' />
+                                    <input size={50} onChange={handleOnChange} type="text" value={userInfo.firstName} name="firstNames" className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' placeholder='nombre ' />
                                 </div>
                             </div>
                         </div>
@@ -56,7 +57,7 @@ const Home = () => {
                                     <label className="block text-gray-700 text-lg font-bold mb-2">Apellidos</label>
                                 </div>
                                 <div className='sm:col-span-4 justify-center '>
-                                    <input size={50} onChange={handleOnChange} type="text" value={userInfo.lastNames} name="lastNames" className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' placeholder='apellido ' />
+                                    <input size={50} onChange={handleOnChange} type="text" value={userInfo.lastName} name="lastNames" className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' placeholder='apellido ' />
                                 </div>
                             </div>
                         </div>
@@ -66,7 +67,7 @@ const Home = () => {
                                     <label className="block text-gray-700 text-lg font-bold mb-2">Identificacion</label>
                                 </div>
                                 <div className='sm:col-span-4 justify-center '>
-                                    <input size={50} onChange={handleOnChange} type="text" value={userInfo.id} name="id" className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ' placeholder='documento' />
+                                    <input size={50} onChange={handleOnChange} type="text" value={userInfo.document} name="document" className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ' placeholder='documento' />
                                 </div>
                             </div>
                         </div>

@@ -11,9 +11,9 @@ const Home = () =>{
     const [isOpen, setIsOpen] = React.useState(false);
 
     const [userReg, setUserReg] = React.useState({
-        name: "",
+        firstName: "",
         lastName: "",
-        idDocument: "",
+        document: 0,
         email: "",
         password: ""
     })
@@ -50,7 +50,8 @@ const Home = () =>{
         }
         try {
             const response = await registerUser(userReg)
-            if (response == "") {
+            console.log(response)
+            if (response === undefined) {
                 setError(true);
                 toggleOverlay()
             }
@@ -86,7 +87,7 @@ return(
                         <div className=' mb-4 '>
                             <div className=' grid grid-flow-row sm:grid-flow-col gap-3 '>
                                 <div className='sm:col-span-4 justify-center '>
-                                    <input size={50} onChange={handleOnChange} type="text" value={userReg.name} name="name" className='shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'placeholder='Nombres' />
+                                    <input size={50} onChange={handleOnChange} type="text" value={userReg.firstName} name="firstName" className='shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'placeholder='Nombres' />
                                 </div>
                             </div>
                         </div>
@@ -100,7 +101,7 @@ return(
                     <div className=' mb-4 '>        
                         <div className=' grid grid-flow-row sm:grid-flow-col gap-3'>
                             <div className='sm:col-span-4 justify-center '>
-                                <input size={50} onChange={handleOnChange} type="text" value={userReg.idDocument} name="idDocument" className='shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'placeholder='Documento' />
+                                <input size={50} onChange={handleOnChange} type="text" value={userReg.document} name="document" className='shadow apperance-none border rounded-lg  py-2 px-3 placeholder:text-black text-black bg-sky-200 leading-tight focus:outline-none focus:shadow-outline'placeholder='Documento' />
                             </div>
                         </div>
                     </div>
