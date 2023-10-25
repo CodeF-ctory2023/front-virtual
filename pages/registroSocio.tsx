@@ -7,10 +7,14 @@ import { BsFillPersonFill, BsFillPlusCircleFill } from 'react-icons/bs';
 import { MdEmail } from 'react-icons/md';
 import { FaPhoneSquareAlt } from 'react-icons/fa';
 
-//Componentes
-import { MainButtonSocio } from '@/components/GestionSociosComponent/MainButtonSocio';
+/* //Componentes
+import { MainButtonSocio } from '@/components/GestionSociosComponent/MainButtonSocio'; */
 
 import { postSocios } from '@/helpers/postSocios';
+
+import Swal, { SweetAlertOptions } from 'sweetalert2';
+
+
 
 interface RegistroSocioProps {
     documentoIdentidad: string;
@@ -33,6 +37,11 @@ const RegistroSocio = ({ documentoIdentidad, nombre, correoElectronico, telefono
         event.preventDefault();
         postSocios(formState);
         onResetForm();
+        Swal.fire({
+            title: 'Socio registrado con éxito',
+            text: 'Para visualizar los socios visite el listado de socios',
+            icon: 'success',
+          } as SweetAlertOptions);
     };
 
     return (
@@ -104,9 +113,12 @@ const RegistroSocio = ({ documentoIdentidad, nombre, correoElectronico, telefono
                         </div>
                     </div>
 
-                    <div className='mt-10'>
-                        <MainButtonSocio name='Registrar' color='#6662D9' onClick={() => { }} />
-                    </div>
+                    <button
+                        className="mt-3 text-white text-md rounded-full px-4 py-2 font-semibold hover:scale-105 bg-blue-500"
+                        type="submit"
+                    >
+                        Registrar Socio
+                    </button>
 
                 </div>
 
