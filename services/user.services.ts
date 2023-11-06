@@ -6,12 +6,12 @@ import { Users } from "@/interfaces/user.interfaces"
 export const changeUserInfo = async (userInfo: Users) => {
 
     try{
-        /* const response = await userApi.post(
-            'Post URL',
+         const response = await userApi.post(
+            'users',
             userInfo
-        ) */
-        const response = userList[0]
-        return response
+         )
+        /* const response = userList[0] */
+        return response.data
     }catch(e){
         throw e
     }
@@ -20,18 +20,18 @@ export const changeUserInfo = async (userInfo: Users) => {
 export const registerUser = async (newUser: Users) => {
 
     try{
-        /* const response = await userApi.post(
-            'Post URL',
+         const response = await userApi.post(
+            'users',
             newUser 
-        )*/
-        const response = userList[1]
-        return response
+        )
+        /* const response = userList[1] */
+        return response.data
     }catch(e){
         throw e
     }
 }
 
-export const verifyUser = async (userData: UserData) => {
+/* export const verifyUser = async (userData: UserData) => {
 
     try{
         const response = await userApi.get(
@@ -41,5 +41,5 @@ export const verifyUser = async (userData: UserData) => {
         return response.data
     }catch(e){
         throw e
-    }
-}
+    } 
+}*/

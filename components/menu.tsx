@@ -5,6 +5,8 @@ import {
   CreditCardIcon,
   MapPinIcon,
   MapIcon,
+  UserGroupIcon,
+  HomeIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
@@ -68,10 +70,29 @@ const Menu = () => {
                 Historial de Viajes
               </Link>
             </div>
+            <div className='flex justify-center gap-10 rounded-lg w-80 sm:px-2 text-lg font-semibold leading-6 hover:bg-cyan-400/[.3] hover:text-blue-600 '>
+              <UserGroupIcon
+                fill='black'
+                className='mx-2 h-10 w-10'
+                aria-hidden='true'
+              />
+              <Link className='h-10 w-full items-center' href='/perfil-familiar'>
+                Perfil Familiar
+              </Link>
+            </div>
           </div>
           <hr className='w-88 my-4' />
         </div>
-        <div className='relative mt-6 flex-1 px-4 sm:px-6'></div>
+        <div className='mt-auto flex justify-center gap-10 rounded-lg w-80 sm:px-2 text-lg font-semibold leading-6 hover:bg-cyan-400/[.3] hover:text-blue-600 '>
+        <HomeIcon
+                fill='black'
+                className='mx-2 h-10 w-10'
+                aria-hidden='true'
+              />
+              <Link className='h-10 w-full mt-2 items-center' href='/perfil-familiar'>
+                Ir a inicio
+              </Link>
+        </div>
       </div>
     </div>
   );

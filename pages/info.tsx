@@ -82,7 +82,27 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
+                    <div className=' mb-4 '>
+                        <h1 className="block text-gray-700 text-lg font-bold mb-8 ml-16 mt-8">Dator De Contacto </h1>
+                            <div className=' grid grid-flow-row sm:grid-flow-col gap-3'>
+                                <div className='w-20 sm:col-span-4 justify-center ml-16 mr-11'>
+                                    <label className="block text-gray-700 text-lg font-bold mb-2">Numero</label>
+                                </div>
+                                <div className='sm:col-span-4 justify-center '>
+                                    <input size={50} onChange={handleOnChange} type="text" value={userInfo.email} name="email" className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ' placeholder='numero ' />
+                                </div>
+                            </div>
+                            <div className=' grid grid-flow-row sm:grid-flow-col gap-3 mt-6'>
+                                <div className='w-20 sm:col-span-4 justify-center ml-16 mr-11'>
+                                    <label className="block text-gray-700 text-lg font-bold mb-2">Direccion</label>
+                                </div>
+                                <div className='sm:col-span-4 justify-center '>
+                                    <input size={50} onChange={handleOnChange} type="text" value={userInfo.email} name="email" className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ' placeholder='Direccion' />
+                                </div>
+                            </div>
+                        </div>
                 </form>
+                
                 <div className=" w-18 h-60 mt-48  mr-6 text-lg font-semibold leading-6 ">
                     <button className="flex gap-1 " onClick={() => window.location.href = '/registro'}>
                         <PencilSquareIcon className="h-10" aria-hidden="true" />

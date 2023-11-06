@@ -9,6 +9,8 @@ import {
   RectangleGroupIcon,
   BanknotesIcon,
   PlusIcon,
+  XCircleIcon,
+  ArrowRightOnRectangleIcon,
 } from '@heroicons/react/24/outline';
 import {Menu} from '../components/menu';
 /* import {Tarjeta} from '../components/tarjetas'; */
@@ -30,86 +32,84 @@ const Home = () => {
                         aria-hidden='true'
                       />
                       <div className='my-4 h-12 sm:px-3 text-4xl font-bold leading-6 text-gray-900'>
-                        Información personal
+                        Agregar Tarjetas
                       </div>
                     </div>
                   </div>
-                  <div className=' mb-4 mt-16 '>
-                    <div className=' mb-4 '>
+                  <div className=' mb-4 mt-16 ml-16'>
+                  <div className=' mb-4 flex '>
+                      <CreditCardIcon className='ml-1 h-10 w-10 mr-3'/>
+                      <CreditCardIcon className='ml-1 h-10 w-10 mr-3'/>
+                      <CreditCardIcon className='ml-1 h-10 w-10 mr-3'/>
+                    </div>
+                    <div className=' mb-6 '>
                       <div className=' grid grid-flow-row sm:grid-flow-col gap-3 '>
-                        <div className='w-20 sm:col-span-4 justify-center ml-16 mr-11 mb-4'>
-                          <label className='block text-gray-700 text-lg font-bold mb-2'>
-                            Nombres{' '}
-                          </label>
-                        </div>
-                        <div className='sm:col-span-4 justify-center '>
+                         <div className='sm:col-span-4 justify-center '>
                           <input
                             size={50}
                             type='text'
                             className='tarea-input text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                            placeholder='nombre '
+                            placeholder='nombre Completo '
                             name='texto'
                           />
                         </div>
                       </div>
                     </div>
-                    <div className=' mb-4 '>
+                    <div className=' mb-6 '>
                       <div className=' grid grid-flow-row sm:grid-flow-col gap-3'>
-                        <div className='w-20 sm:col-span-4 justify-center ml-16 mr-11 mb-4'>
-                          <label className='block text-gray-700 text-lg font-bold mb-2'>
-                            Apellidos
-                          </label>
-                        </div>
+                        
                         <div className='sm:col-span-4 justify-center '>
                           <input
                             size={50}
                             type='text'
                             className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                            placeholder='apellido '
+                            placeholder='Numero de Tarjeta'
                             name='apellido'
                           />
                         </div>
                       </div>
                     </div>
-                    <div className=' mb-4 '>
-                      <div className=' grid grid-flow-row sm:grid-flow-col gap-3'>
-                        <div className='w-20 sm:col-span-4 justify-center ml-16 mr-11 mb-4'>
-                          <label className='block text-gray-700 text-lg font-bold mb-2'>
-                            Identificacion
-                          </label>
-                        </div>
-                        <div className='sm:col-span-4 justify-center '>
+                    <div className=' mb-6 '>
+                      <div className=' flex  '>
+                        
+                        <div className='mr-4'>
                           <input
-                            size={50}
+                            size={30}
                             type='text'
                             className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline '
-                            placeholder='documento'
+                            placeholder='fecha de expiracion'
                             name='id'
                           />
                         </div>
-                      </div>
-                    </div>
-                    <div className=' mb-4 '>
-                      <div className=' grid grid-flow-row sm:grid-flow-col gap-3'>
-                        <div className='w-20 sm:col-span-4 justify-center ml-16 mr-11'>
-                          <label className='block text-gray-700 text-lg font-bold mb-2'>
-                            Correo
-                          </label>
-                        </div>
-                        <div className='sm:col-span-4 justify-center '>
+                        <div className=' '>
                           <input
-                            size={50}
+                            size={10}
                             type='text'
                             className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline '
-                            placeholder='correo '
+                            placeholder='CCV '
                             name='email'
                           />
                         </div>
                       </div>
+                      <div className="w-full mt-2 px-18 flex justify-end flex-row gap-10">
+                        <button type="button" className="flex gap-1 "onClick={() => window.location.href = '/metodos-pago'}>
+                            <XCircleIcon className="ml-1 h-10 w-10" aria-hidden="true" />
+                            <div className="mt-2">
+                                Cancel
+                            </div>
+                        </button>
+                        <button type="button" className="flex gap-1 " >
+                            <ArrowRightOnRectangleIcon className="ml-1 h-10 w-10" aria-hidden="true" />
+                            <div className="mt-2">
+                                Registrar
+                            </div>
+                        </button>
                     </div>
+                    </div>
+                    
                   </div>
                 </form>
-                <button className='tarea-boton'>agregar</button>
+                
               </div>
             </div>
           </div>

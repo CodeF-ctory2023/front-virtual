@@ -130,7 +130,7 @@ return(
                         </div>
                     </div>
                     <div className="w-full mt-2 px-18 flex justify-end flex-row gap-10">
-                        <button type="button" className="flex gap-1 ">
+                        <button type="button" className="flex gap-1 "onClick={() => window.location.href = '/info'}>
                             <XCircleIcon className="ml-1 h-10 w-10" aria-hidden="true" />
                             <div className="mt-2">
                                 Cancel
