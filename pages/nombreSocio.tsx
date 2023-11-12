@@ -4,7 +4,6 @@ import { MdEmail, MdLocationCity } from 'react-icons/md';
 import { FaPhoneSquareAlt } from 'react-icons/fa';
 import { ButtonSocios } from '@/components/GestionSociosComponent/ButtonSocios';
 import { Dialog } from '@/components/GestionSociosComponent/dialog';
-import { useFetchSocios } from '@/hooks/useFetchSocios';
 
 const NombreSocio: React.FC = () => {
   return (
