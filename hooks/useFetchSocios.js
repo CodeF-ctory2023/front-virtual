@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { getSocios } from '@/helpers/getSocios';
 
+
 export const useFetchSocios = () => {
  
-    const [socios, setSocios] = useState([]);
+    const [socios, setSocios] = useState<socios>([]);
 
     const [isLoading, setIsLoading] = useState( true );
 
