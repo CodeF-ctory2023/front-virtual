@@ -2,17 +2,6 @@ import React from 'react';
 import { ListadoSocios } from '@/components/GestionSociosComponent/ListadoSocios';
 import { useFetchSocios } from '@/hooks/useFetchSocios';
 
-interface Socio {
-  id: number;
-  cedula: string;
-  nombre: string;
-  telefono: string;
-  licencia: string;
-  pJudicial: string;
-  estado: string;
-  info: string;
-}
-
 const TablaSocios: React.FC = () => {
   const { socios, isLoading } = useFetchSocios();
 
@@ -49,16 +38,8 @@ const TablaSocios: React.FC = () => {
             </tr>
           </thead>
 
-          {socios.map((socio: Socio) => (
-            <ListadoSocios
-              key={socio.id}
-              documentoIdentidad={Number(socio.cedula)}
-              nombre={socio.nombre}
-              telefono={Number(socio.telefono)}
-              licenciaConducir={socio.licencia}
-              pasadoJudicial={socio.pJudicial}
-              estadoVerificacion={socio.estado}
-            />
+          {socios.map((socio) => (
+            <ListadoSocios key={socio.id} {...socio} />
           ))}
         </table>
       </div>
