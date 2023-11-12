@@ -7,8 +7,6 @@ import { Dialog } from '@/components/GestionSociosComponent/dialog';
 import { useFetchSocios } from '@/hooks/useFetchSocios';
 
 const NombreSocio: React.FC = () => {
-  const { socios } = useFetchSocios();
-
   return (
     <div className='bg-[#F2F2F2]'>
       <div className='flex items-center justify-center bg-blue-socio p-4 rounded-sm'>
