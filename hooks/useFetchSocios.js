@@ -4,6 +4,7 @@ import { getSocios } from '@/helpers/getSocios';
 export const useFetchSocios = () => {
  
     const [socios, setSocios] = useState([]);
+
     const [isLoading, setIsLoading] = useState( true );
 
     const getNewSocios = async() => {
