@@ -1,5 +1,5 @@
 import React from 'react';
-import {TablaGestionSocios} from '@/components/GestionSociosComponent/table';
+import { TablaGestionSocios } from '@/components/GestionSociosComponent/table';
 
 const data = [
   {
@@ -8,7 +8,7 @@ const data = [
     telefono: '####',
     licencia: '',
     pasJudicial: 'P.Judicial',
-    estado: 'ACEPTADO'
+    estado: 'ACEPTADO',
   },
   {
     cedula: '112',
@@ -16,23 +16,23 @@ const data = [
     telefono: '####',
     licencia: '',
     pasJudicial: 'P.Judicial',
-    estado: 'rechazado'
+    estado: 'rechazado',
   },
 ];
 
 const secondPage: React.FC = () => {
   return (
     <div>
-      <div className="flex items-center justify-center bg-blue-socio p-4 rounded-sm">
-        <h1 className="text-[35px] text-white text-center font-semibold">
+      <div className='flex items-center justify-center bg-blue-socio p-4 rounded-sm'>
+        <h1 className='text-[35px] text-white text-center font-semibold'>
           Solicitud de Socios
         </h1>
       </div>
-      <div className="p-4">
+      <div className='p-4'>
         <TablaGestionSocios data={data} />
       </div>
     </div>
   );
-}
+};
 
 export default secondPage;
