@@ -7,3 +7,10 @@ export interface Users {
     email:      string;
     password: string;
 }
+
+export interface Sites {
+    id: number;
+    imageId: number;
+    name:  string;
+    address:   string;
+}

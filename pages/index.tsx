@@ -9,7 +9,7 @@ const Home = () => {
       <Link href='/info'>
         <div className='card'>
           <h2>Usuario</h2>
-          <span>Ingresar al múdo de usuarios</span>
+          <span>Ingresar al modulo de usuarios</span>
         </div>
       </Link>
     </main>

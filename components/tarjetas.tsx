@@ -11,10 +11,7 @@ const Tarjetas= () => {
                     <PencilSquareIcon className="mx-4 mt-1 h-10 w-8" aria-hidden="true" />
                 </div>
             </div>
-           
-            
         </div>
-
     )
 }
 export  {Tarjetas};
