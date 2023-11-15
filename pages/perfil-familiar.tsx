@@ -10,7 +10,6 @@ import {
     BanknotesIcon,
     PlusIcon,
     UserGroupIcon,
-    TrashIcon,
 } from '@heroicons/react/24/outline';
 import { Menu } from '@/components/menu';
 /* import {Tarjeta} from '../components/tarjetas'; */
