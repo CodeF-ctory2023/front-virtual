@@ -14,9 +14,9 @@ const testSites: Sites[] = [
   { id: 2, imageId: 2, name: 'Universidad', address: 'Dirección 3' },
 ];
 
-const sitiosfavoritos = () => {
+const SitiosFavoritos = () => {
 
-  const [sites, setSites] = React.useState<Sites[]>(testSites);
+  const [sites, setSites] = React.useState(testSites);
 
   const handleAdd = () => {
     const newSite: Sites = {
@@ -73,4 +73,4 @@ const sitiosfavoritos = () => {
   );
 };
 
-export default sitiosfavoritos;
+export default SitiosFavoritos;

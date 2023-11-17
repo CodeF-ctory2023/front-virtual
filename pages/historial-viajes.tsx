@@ -12,9 +12,9 @@ const testTravels: Travel[] = [
   { origin: 'Origen 3', destiny: 'Destino 3', cost: 21.41, completed: 2 },
 ];
 
-const historialviajes = () => {
+const HistorialViajes = () => {
 
-  const [travels, setLoadTravels] = React.useState<Travel[]>(testTravels);
+  const [travels, setLoadTravels] = React.useState(testTravels);
 
   return (
     <div>
@@ -51,4 +51,4 @@ const historialviajes = () => {
   )
 }
 
-export default historialviajes
+export default HistorialViajes
