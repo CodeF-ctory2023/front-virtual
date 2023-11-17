@@ -2,7 +2,6 @@ import {
   RectangleGroupIcon,
 } from '@heroicons/react/24/outline';
 import {Menu} from '@/components/menu';
-/* import {Tarjeta} from '../components/tarjetas'; */
 import React from 'react';
 import { Viajes } from '../components/Viajes';
 import { Travel } from "@/interfaces/user.interfaces";
@@ -15,7 +14,7 @@ const testTravels: Travel[] = [
 
 const historialviajes = () => {
 
-  const [travels, setLoadTravels] = React.useState(testTravels);
+  const [travels, setLoadTravels] = React.useState<Travel[]>(testTravels);
 
   return (
     <div>
