@@ -14,3 +14,10 @@ export interface Sites {
     name:  string;
     address:   string;
 }
+
+export interface Travel {
+    origin: string;
+    destiny: string;
+    cost: number;
+    completed: number;
+}

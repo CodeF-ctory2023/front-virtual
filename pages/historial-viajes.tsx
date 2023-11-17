@@ -1,22 +1,22 @@
 import {
-  PencilSquareIcon,
-  ClipboardDocumentListIcon,
-  UserCircleIcon,
-  IdentificationIcon,
-  CreditCardIcon,
-  MapPinIcon,
-  MapIcon,
   RectangleGroupIcon,
-  BanknotesIcon,
-  PlusIcon,
 } from '@heroicons/react/24/outline';
 import {Menu} from '@/components/menu';
 /* import {Tarjeta} from '../components/tarjetas'; */
-import React, { useState } from 'react';
-import AgregarTarjetas from './agregar-tarjetas';
-import {Viajes} from '../components/Viajes';
+import React from 'react';
+import { Viajes } from '../components/Viajes';
+import { Travel } from "@/interfaces/user.interfaces";
+
+const testTravels: Travel[] = [
+  { origin: 'Origen 1', destiny: 'Destino 1', cost: 100, completed: 0 },
+  { origin: 'Origen 2', destiny: 'Destino 2', cost: 85.34, completed: 1 },
+  { origin: 'Origen 3', destiny: 'Destino 3', cost: 21.41, completed: 2 },
+];
 
 const historialviajes = () => {
+
+  const [travels, setLoadTravels] = React.useState(testTravels);
+
   return (
     <div>
       <div className='relative z-1'>
@@ -35,16 +35,13 @@ const historialviajes = () => {
                       <div className='my-4 h-12 sm:px-3 text-4xl font-bold leading-6 text-gray-900'>
                         Historial de Viajes 
                       </div>
-                    </div>
-                    
+                    </div>  
                   </div>
                   <div className='flex flex-col w-full   '>
-                    <Viajes />
-                    
+                    <Viajes loadTravels={travels} setLoadTravels={setLoadTravels} />
                   </div>
                 </div>
                 <div className=' w-18 h-60 mt-16  mr-6 text-lg font-semibold leading-6 '>
-                  
                 </div>
               </div>
             </div>

@@ -16,20 +16,15 @@ const testSites: Sites[] = [
 
 const sitiosfavoritos = () => {
 
-  const [sites, setSites] = useState(testSites);
-
-  const [newSite, setNewSite] = React.useState({
-    id: 0,
-    imageId: 0,
-    name:  '',
-    address:   '',
-  });
+  const [sites, setSites] = React.useState(testSites);
 
   const handleAdd = () => {
-    setNewSite({
-      ...newSite,
-      id: sites.length
-    });
+    const newSite: Sites = {
+      id: sites.length,
+      imageId: 0,
+      name:  '',
+      address:   '',
+    }
     setSites([
       ...sites,
       newSite
