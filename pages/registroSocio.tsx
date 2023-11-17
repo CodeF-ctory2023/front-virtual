@@ -14,6 +14,8 @@ import { postSocios } from '@/helpers/postSocios';
 
 import Swal, { SweetAlertOptions } from 'sweetalert2';
 
+import { VerticalNavbar } from '@/components/GestionSociosComponent/NavBar';
+
 interface RegistroSocioProps {
   documentoIdentidad: string;
   nombre: string;
@@ -48,6 +50,8 @@ const RegistroSocio = ({
   };
 
   return (
+    <>
+    <VerticalNavbar />
     <div className='flex h-screen'>
       <div className='w-[35%] bg-[#F2F2F2]'>
         <img src='/images/ssmu.png' alt='registro' />
@@ -124,6 +128,7 @@ const RegistroSocio = ({
         </div>
       </form>
     </div>
+    </>
   );
 };
 

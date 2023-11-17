@@ -4,9 +4,18 @@ import { MdEmail, MdLocationCity } from 'react-icons/md';
 import { FaPhoneSquareAlt } from 'react-icons/fa';
 import { ButtonSocios } from '@/components/GestionSociosComponent/ButtonSocios';
 import { Dialog } from '@/components/GestionSociosComponent/dialog';
+import { VentEmergente } from '@/components/GestionSociosComponent/ventEmergente';
+import { useModal } from '@/hooks/useModal';
+import { VerticalNavbar } from '@/components/GestionSociosComponent/NavBar';
 
 const NombreSocio: React.FC = () => {
+
+  const [isOpenModal1, openModal1, closeModal1] = useModal(false);
+  const [isOpenModal2, openModal2, closeModal2] = useModal(false); 
+
   return (
+    <>
+    <VerticalNavbar />
     <div className='bg-[#F2F2F2]'>
       <div className='flex items-center justify-center bg-blue-socio p-4 rounded-sm'>
         <h1 className='text-[35px] text-white text-center font-semibold'>
@@ -121,22 +130,34 @@ const NombreSocio: React.FC = () => {
                 {/* <p>{newSocios.ciudad_de_servicio}</p> */}
               </div>
             </div>
-          </div>
-        </div>
-        <div className='p-2 pr-20 flex flex-row-reverse'>
-          <div className='px-5'>
-            <ButtonSocios color='#F39A9E' onClick={() => {}}>
-              <span>Rechazar</span>
-            </ButtonSocios>
-          </div>
-          <div className='px-5'>
-            <ButtonSocios color='#ABD08D' onClick={() => {}}>
-              <span>Aceptar</span>
-            </ButtonSocios>
+            <div className="mt-20 p-2 pr-20 flex flex-row-reverse">
+            <div className="px-5">
+                <ButtonSocios color='#F39A9E' onClick={openModal1}>
+                  <span>Rechazar</span>
+                </ButtonSocios>
+                <VentEmergente isOpen={isOpenModal1} closeModal={closeModal1}>
+                  <p className='mb-4 text-center'>La solicitud ha sido rechazada exitosamente</p>
+                  <form>
+                     <input type="text" placeholder='Motivo de rechazo (opcional)' className="border-solid border-2 border-neutral-200"/>
+                     <button className='border-solid bg-green-socio rounded ml-2 p-1'>Enviar</button>
+                  </form>
+                </VentEmergente>
+              </div>
+              <div className="px-5">
+                <ButtonSocios color='#ABD08D' onClick={openModal2}>
+                  <span>Aceptar</span>
+                </ButtonSocios>
+                <VentEmergente isOpen={isOpenModal2} closeModal={closeModal2}>
+                  <p className='mb-4 text-center'>La solicitud ha sido aceptada exitosamente</p>
+                </VentEmergente>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    </>
+    
   );
 };
 
