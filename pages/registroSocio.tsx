@@ -1,6 +1,6 @@
 /* import { Input } from '@/components/GestionSociosComponent/Input'; */
 import { useFormInput } from '@/hooks/useFormInput';
-
+import { useState } from "react";
 //React Icons
 import { HiIdentification } from 'react-icons/hi2';
 import { BsFillPersonFill, BsFillPlusCircleFill } from 'react-icons/bs';
@@ -36,15 +36,43 @@ const RegistroSocio = ({
     documentoIdentidad: '',
   });
 
-  const onsubmitForm = (event: { preventDefault: () => void }) => {
+  const [imageSelected, setImageSelected] = useState<string | null>(null);
+  const [urlImage, setUrlImage] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false)
+
+  const onsubmitForm = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    postSocios(formState);
+    /* postSocios(formState); */
+    // Configura la nube de Cloudinary
+    const cloudName = 'dk1tsorel';
+    const uploadPreset = 'qfekt1id';
+
+    const formData = new FormData();
+    formData.append('file', imageSelected);
+    formData.append('upload_preset', uploadPreset);
+
+    try {
+      // Realiza la carga de la imagen a Cloudinary
+      const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      // Almacena la URL de la imagen en el estado
+      setUrlImage(data.secure_url);
+    } catch (error) {
+      console.error('Error al cargar la imagen a Cloudinary:', error);
+    } finally {
+      setLoading(false);
+    }
     onResetForm();
-    Swal.fire({
+    /* Swal.fire({
       title: 'Socio registrado con éxito',
       text: 'Para visualizar los socios visite el listado de socios',
       icon: 'success',
-    } as SweetAlertOptions);
+    } as SweetAlertOptions); */
   };
 
   return (
@@ -101,6 +129,10 @@ const RegistroSocio = ({
           <div className='flex flex-wrap gap-4 mt-4'>
             <div className='flex items-center'>
               <strong className='text-xl'>Pasado Judicial</strong>
+              <input type="file" onChange={(event)=> {
+                setImageSelected(event.target.files[0]);
+                }}
+              />
               <BsFillPlusCircleFill className='ml-3 mr-4 text-3xl text-red-socio hover:scale-110' />
             </div>
 
