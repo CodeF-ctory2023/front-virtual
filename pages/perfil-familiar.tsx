@@ -1,21 +1,13 @@
 import {
     PencilSquareIcon,
-    ClipboardDocumentListIcon,
+    TrashIcon,
     UserCircleIcon,
-    IdentificationIcon,
-    CreditCardIcon,
-    MapPinIcon,
-    MapIcon,
-    RectangleGroupIcon,
-    BanknotesIcon,
     PlusIcon,
     UserGroupIcon,
 } from '@heroicons/react/24/outline';
 import { Menu } from '@/components/menu';
 /* import {Tarjeta} from '../components/tarjetas'; */
 import React, { useState } from 'react';
-import AgregarTarjetas from './agregar-tarjetas';
-import { Tarjetas } from '../components/tarjetas';
 import Link from 'next/link';
 
 const Familia = () => {

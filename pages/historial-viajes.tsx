@@ -2,9 +2,10 @@ import {
   RectangleGroupIcon,
 } from '@heroicons/react/24/outline';
 import {Menu} from '@/components/menu';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Viajes } from '../components/Viajes';
 import { Travel } from "@/interfaces/user.interfaces";
+import { loadTravelHistory } from '../services/user.services';
 
 const testTravels: Travel[] = [
   { origin: 'Origen 1', destiny: 'Destino 1', cost: 100, completed: 0 },
@@ -14,7 +15,26 @@ const testTravels: Travel[] = [
 
 const HistorialViajes = () => {
 
-  const [travels, setLoadTravels] = React.useState(testTravels);
+  const [travels, setTravels] = React.useState(testTravels);
+
+  useEffect(() => {
+    try {
+      const response = loadTravelHistory()
+      console.log(response)
+      if (response === undefined) {
+        return
+      }
+      response
+        .then((response) => {
+          setTravels(response);
+        })
+        .catch(() => {
+          setTravels([]);
+        });
+    } catch (error) {
+        console.log("Error: ", error)
+    }
+  }, []);
 
   return (
     <div>
@@ -37,7 +57,7 @@ const HistorialViajes = () => {
                     </div>  
                   </div>
                   <div className='flex flex-col w-full   '>
-                    <Viajes loadTravels={travels} setLoadTravels={setLoadTravels} />
+                    <Viajes loadTravels={travels} setLoadTravels={setTravels} />
                   </div>
                 </div>
                 <div className=' w-18 h-60 mt-16  mr-6 text-lg font-semibold leading-6 '>

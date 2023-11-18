@@ -3,10 +3,10 @@ import {
   MapPinIcon,
 } from '@heroicons/react/24/outline';
 import { Menu } from '@/components/menu';
-/* import {Tarjeta} from '../components/tarjetas'; */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Sitios } from '../components/sitios';
 import { Sites } from '@/interfaces/user.interfaces';
+import { loadFavSites } from '../services/user.services';
 
 const testSites: Sites[] = [
   { id: 0, imageId: 0, name: 'Casa', address: 'Dirección 1' },
@@ -17,6 +17,25 @@ const testSites: Sites[] = [
 const SitiosFavoritos = () => {
 
   const [sites, setSites] = React.useState(testSites);
+
+  useEffect(() => {
+    try {
+      const response = loadFavSites()
+      console.log(response)
+      if (response === undefined) {
+        return
+      }
+      response
+        .then((response) => {
+          setSites(response);
+        })
+        .catch(() => {
+          setSites([]);
+        });
+    } catch (error) {
+        console.log("Error: ", error)
+    }
+  }, []);
 
   const handleAdd = () => {
     const newSite: Sites = {

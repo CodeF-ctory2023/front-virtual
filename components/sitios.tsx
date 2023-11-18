@@ -11,6 +11,7 @@ import {
 } from "@heroicons/react/24/outline";
 import React from 'react';
 import { Sites } from "@/interfaces/user.interfaces";
+import { updateFavSites } from '../services/user.services';
 
 const icons = [
     { content: <HomeIcon className='ml-1 h-10 w-10 mr-6' aria-hidden='true' /> },
@@ -74,18 +75,30 @@ export default function Sitios({loadSites, setLoadSites}: {loadSites: Sites[], s
             } else {
               return c;
             }
-          });
+        });
         setLoadSites(newData);
+        updateDB(newData)
     };
 
     const handleErase = (id: Number, loadSites: Sites[], setLoadSites: React.Dispatch<React.SetStateAction<Sites[]>>) => () => {
         const updatedRows = loadSites.filter((loadSites) => loadSites.id !== id);
-        setLoadSites(
-            updatedRows.map((row, index) => {
-                return { ...row, id: index };
-            })
-        );
+        const newData = updatedRows.map((row, index) => { return { ...row, id: index };})
+        setLoadSites(updatedRows);
+        updateDB(newData)
     };
+
+    const updateDB = async (newData: Sites[]) => {     
+        try {
+            const response = await updateFavSites(newData)
+            console.log(response)
+            if (response === undefined) {
+                setLoadSites(loadSites);
+            }
+            setLoadSites(newData);
+        } catch (error) {
+            console.log("Error: ", error)
+        }
+    }
 
     return (
         <>

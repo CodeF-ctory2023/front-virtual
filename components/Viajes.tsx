@@ -7,6 +7,7 @@ import {
     ChevronRightIcon
 } from "@heroicons/react/24/outline";
 import { Travel } from "@/interfaces/user.interfaces";
+import { updateFavSites } from '../services/user.services';
 
 const Viajes = ({loadTravels, setLoadTravels}: {loadTravels: Travel[], setLoadTravels: React.Dispatch<React.SetStateAction<Travel[]>>}) => {
 
@@ -15,6 +16,19 @@ const Viajes = ({loadTravels, setLoadTravels}: {loadTravels: Travel[], setLoadTr
         { content: <div className='font-medium text-green-600' aria-hidden='true'> Completed </div> },
         { content: <div className='font-medium text-gray-400' aria-hidden='true'> Cancelled </div> }
     ];
+  
+  const handleAdd = async () => {
+    try {
+            const response = await updateFavSites([])
+            console.log(response)
+            if (response === undefined) {
+                setLoadTravels(response);
+            }
+            setLoadTravels(response);
+        } catch (error) {
+            console.log("Error: ", error)
+        }
+    }
 
     return (
         <div className="flex gap-11">
