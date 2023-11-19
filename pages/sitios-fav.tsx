@@ -8,11 +8,7 @@ import { Sitios } from '../components/sitios';
 import { Sites } from '@/interfaces/user.interfaces';
 import { loadFavSites } from '../services/user.services';
 
-const testSites: Sites[] = [
-  { id: 0, imageId: 0, name: 'Casa', address: 'Dirección 1' },
-  { id: 1, imageId: 1, name: 'Trabajo', address: 'Dirección 2' },
-  { id: 2, imageId: 2, name: 'Universidad', address: 'Dirección 3' },
-];
+const testSites: Sites[] = [];
 
 const SitiosFavoritos = () => {
 

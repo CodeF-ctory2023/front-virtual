@@ -7,11 +7,7 @@ import { Viajes } from '../components/Viajes';
 import { Travel } from "@/interfaces/user.interfaces";
 import { loadTravelHistory } from '../services/user.services';
 
-const testTravels: Travel[] = [
-  { id: 0, origin: 'Origen 1', destiny: 'Destino 1', cost: 100, completed: 0 },
-  { id: 1, origin: 'Origen 2', destiny: 'Destino 2', cost: 85.34, completed: 1 },
-  { id: 2, origin: 'Origen 3', destiny: 'Destino 3', cost: 21.41, completed: 2 },
-];
+const testTravels: Travel[] = [];
 
 const HistorialViajes = () => {
 
