@@ -84,6 +84,20 @@ export const updateFavSites = async (sites: Sites[]) => {
     }
 }
 
+export const addFavSite = async (sites: Sites) => {
+
+    try{
+         const response = await userApi.post(
+            'sites',
+            sites 
+        )
+        /* const response = userList[1] */
+        return response.data
+    }catch(e){
+        throw e
+    }
+}
+
 /* export const verifyUser = async (userData: UserData) => {
 
     try{

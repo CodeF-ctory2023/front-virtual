@@ -76,14 +76,12 @@ export default function Sitios({loadSites, setLoadSites}: {loadSites: Sites[], s
               return c;
             }
         });
-        setLoadSites(newData);
         updateDB(newData)
     };
 
-    const handleErase = (id: Number, loadSites: Sites[], setLoadSites: React.Dispatch<React.SetStateAction<Sites[]>>) => () => {
+    const handleErase = (id: Number, loadSites: Sites[]) => () => {
         const updatedRows = loadSites.filter((loadSites) => loadSites.id !== id);
         const newData = updatedRows.map((row, index) => { return { ...row, id: index };})
-        setLoadSites(updatedRows);
         updateDB(newData)
     };
 
@@ -139,7 +137,7 @@ export default function Sitios({loadSites, setLoadSites}: {loadSites: Sites[], s
                                         <button className='' onClick={handleEdit(e.id)}>
                                             <PencilSquareIcon className='ml-1 mt-1 h-8 w-8 mr-2' aria-hidden='true' />
                                         </button>
-                                        <button className='' onClick={handleErase(e.id, loadSites, setLoadSites)}>
+                                        <button className='' onClick={handleErase(e.id, loadSites)}>
                                             <TrashIcon className='ml-1 h-8 w-8 mr-2' aria-hidden='true' />
                                         </button>
                                     </div>

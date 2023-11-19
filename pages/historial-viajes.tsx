@@ -8,9 +8,9 @@ import { Travel } from "@/interfaces/user.interfaces";
 import { loadTravelHistory } from '../services/user.services';
 
 const testTravels: Travel[] = [
-  { origin: 'Origen 1', destiny: 'Destino 1', cost: 100, completed: 0 },
-  { origin: 'Origen 2', destiny: 'Destino 2', cost: 85.34, completed: 1 },
-  { origin: 'Origen 3', destiny: 'Destino 3', cost: 21.41, completed: 2 },
+  { id: 0, origin: 'Origen 1', destiny: 'Destino 1', cost: 100, completed: 0 },
+  { id: 1, origin: 'Origen 2', destiny: 'Destino 2', cost: 85.34, completed: 1 },
+  { id: 2, origin: 'Origen 3', destiny: 'Destino 3', cost: 21.41, completed: 2 },
 ];
 
 const HistorialViajes = () => {
@@ -18,22 +18,6 @@ const HistorialViajes = () => {
   const [travels, setTravels] = React.useState(testTravels);
 
   useEffect(() => {
-    try {
-      const response = loadTravelHistory()
-      console.log(response)
-      if (response === undefined) {
-        return
-      }
-      response
-        .then((response) => {
-          setTravels(response);
-        })
-        .catch(() => {
-          setTravels([]);
-        });
-    } catch (error) {
-        console.log("Error: ", error)
-    }
   }, []);
 
   return (

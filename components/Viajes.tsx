@@ -7,7 +7,8 @@ import {
     ChevronRightIcon
 } from "@heroicons/react/24/outline";
 import { Travel } from "@/interfaces/user.interfaces";
-import { updateFavSites } from '../services/user.services';
+import { addFavSite, updateTravelHistory } from '../services/user.services';
+import React from "react";
 
 const Viajes = ({loadTravels, setLoadTravels}: {loadTravels: Travel[], setLoadTravels: React.Dispatch<React.SetStateAction<Travel[]>>}) => {
 
@@ -17,17 +18,55 @@ const Viajes = ({loadTravels, setLoadTravels}: {loadTravels: Travel[], setLoadTr
         { content: <div className='font-medium text-gray-400' aria-hidden='true'> Cancelled </div> }
     ];
   
-  const handleAdd = async () => {
-    try {
-            const response = await updateFavSites([])
+    const [checked, setChecked] = React.useState({
+        checked: false,
+        id: 0
+    });
+
+    const handleAddFavs = async () => {
+        if (checked.checked != true) {
+            return
+        }
+        const updatedRows = ({
+            id: 0,
+            imageId: 3,
+            name: loadTravels[checked.id].destiny,
+            address: loadTravels[checked.id].destiny,
+        });
+        /* The id should be equal to the fav sites lenght, but I don't know how to get that here */
+        try {
+            const response = await addFavSite(updatedRows)
             console.log(response)
             if (response === undefined) {
-                setLoadTravels(response);
             }
-            setLoadTravels(response);
         } catch (error) {
             console.log("Error: ", error)
         }
+    }
+
+    const handleDelete = async () => {
+        if (checked.checked != true) {
+            return
+        }
+        const updatedRows = loadTravels.filter((loadSites) => loadSites.id !== checked.id);
+        const newData = updatedRows.map((row, index) => { return { ...row, id: index };})
+        try {
+            const response = await updateTravelHistory([])
+            console.log(response)
+            if (response === undefined) {
+                setLoadTravels(loadTravels);
+            }
+            setLoadTravels(newData);
+        } catch (error) {
+            console.log("Error: ", error)
+        }
+    }
+
+    const handleCheck = (id: Number) => () => {
+        setChecked({
+            checked: !checked.checked,
+            id: Number(id)
+        })
     }
 
     return (
@@ -38,9 +77,14 @@ const Viajes = ({loadTravels, setLoadTravels}: {loadTravels: Travel[], setLoadTr
                     <div className="mt-8 ml-20 w-full h-full flex flex-col">
                         <div className=" w-[22rem] h-full  ">
                             <div className="border rounded-xl shadow-md">
-                                <div className="mt-2 w-auto flex text-gray-800">
-                                    <PlayCircleIcon className='ml-2 h-7 w-7 mr-4 text-green-500' aria-hidden='true' /> 
-                                    {e.origin} 
+                                <div className="mt-2 w-auto flex justify-between text-gray-800">
+                                    <div className="flex">
+                                        <PlayCircleIcon className='ml-2 h-7 w-7 mr-4 text-green-500' aria-hidden='true' /> 
+                                        {e.origin} 
+                                    </div>
+                                    <div className="mt-1 mr-4 w-5 h-5">
+                                        <input onChange={handleCheck(e.id)} className="w-5 h-5" type="checkbox" name={"id"+e.id} />
+                                    </div>
                                 </div>
                                 <div className="ml-[21px] h-6 w-6 flex text-gray-300 text-[9px]">
                                     | <br/>
@@ -70,12 +114,12 @@ const Viajes = ({loadTravels, setLoadTravels}: {loadTravels: Travel[], setLoadTr
             })}
             </div>
             <div className="flex flex-col mt-8" >
-                <button className="flex flex-row font-semibold mb-3">
+                <button onClick={handleDelete} className="flex flex-row font-semibold mb-3">
                     <TrashIcon className='ml-1 h-8 w-8 mr-2' aria-hidden='true' />
                     Eliminar
                 </button>
                 <button className="flex flex-row font-semibold">
-                    <PlusCircleIcon className='ml-1 h-8 w-8 mr-2' aria-hidden='true' />
+                    <PlusCircleIcon onClick={handleAddFavs} className='ml-1 h-8 w-8 mr-2' aria-hidden='true' />
                     Agregar a sitios favoritos
                 </button>
             </div>

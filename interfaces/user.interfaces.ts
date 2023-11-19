@@ -16,6 +16,7 @@ export interface Sites {
 }
 
 export interface Travel {
+    id: number;
     origin: string;
     destiny: string;
     cost: number;
