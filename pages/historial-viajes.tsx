@@ -14,6 +14,22 @@ const HistorialViajes = () => {
   const [travels, setTravels] = React.useState(testTravels);
 
   useEffect(() => {
+    try {
+      const response = loadTravelHistory()
+      console.log(response)
+      if (response === undefined) {
+        return
+      }
+      response
+        .then((response) => {
+          setTravels(response);
+        })
+        .catch(() => {
+          setTravels([]);
+        });
+    } catch (error) {
+        console.log("Error: ", error)
+    }
   }, []);
 
   return (
