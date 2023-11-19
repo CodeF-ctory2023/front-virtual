@@ -1,6 +1,6 @@
 /* import { Input } from '@/components/GestionSociosComponent/Input'; */
 import { useFormInput } from '@/hooks/useFormInput';
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 //React Icons
 import { HiIdentification } from 'react-icons/hi2';
 import { BsFillPersonFill, BsFillPlusCircleFill } from 'react-icons/bs';
@@ -11,16 +11,18 @@ import { FaPhoneSquareAlt } from 'react-icons/fa';
 import { MainButtonSocio } from '@/components/GestionSociosComponent/MainButtonSocio'; */
 
 import { postSocios } from '@/helpers/postSocios';
+import { postImages } from '@/helpers/postImages';
 
-import Swal, { SweetAlertOptions } from 'sweetalert2';
+/* import Swal, { SweetAlertOptions } from 'sweetalert2'; */
 
 interface RegistroSocioProps {
   documentoIdentidad: string;
   nombre: string;
   correoElectronico: string;
   telefono: number;
-
-  /* onChange: (event: React.ChangeEvent<HTMLInputElement>) => void; */
+  pasadoJudicial: string;
+  licenciaConducir: string;
+  foto: string;
 }
 
 const RegistroSocio = ({
@@ -28,45 +30,24 @@ const RegistroSocio = ({
   nombre,
   correoElectronico,
   telefono,
+  pasadoJudicial,
+  licenciaConducir,
+  foto,
 }: RegistroSocioProps) => {
-  const { onResetForm, onInputChange, formState } = useFormInput({
+  const { onResetForm, onInputChange, formState, setFormState } = useFormInput({
     nombre: '',
     correoElectronico: '',
     telefono: null,
     documentoIdentidad: '',
+    pasadoJudicial: '',
+    licenciaConducir: '',
+    foto: '',
   });
 
-  const [imageSelected, setImageSelected] = useState<string | null>(null);
-  const [urlImage, setUrlImage] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false)
 
   const onsubmitForm = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    /* postSocios(formState); */
-    // Configura la nube de Cloudinary
-    const cloudName = 'dk1tsorel';
-    const uploadPreset = 'qfekt1id';
-
-    const formData = new FormData();
-    formData.append('file', imageSelected);
-    formData.append('upload_preset', uploadPreset);
-
-    try {
-      // Realiza la carga de la imagen a Cloudinary
-      const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
-        method: 'POST',
-        body: formData,
-      });
-
-      const data = await response.json();
-
-      // Almacena la URL de la imagen en el estado
-      setUrlImage(data.secure_url);
-    } catch (error) {
-      console.error('Error al cargar la imagen a Cloudinary:', error);
-    } finally {
-      setLoading(false);
-    }
+    postSocios(formState);
     onResetForm();
     /* Swal.fire({
       title: 'Socio registrado con éxito',
@@ -74,6 +55,27 @@ const RegistroSocio = ({
       icon: 'success',
     } as SweetAlertOptions); */
   };
+  const uploadImage = async (e: ChangeEvent<HTMLInputElement>, fieldToUpdate: string) => {
+    const file = e.target.files?.[0];
+  
+    // Verificar si hay un archivo seleccionado
+    if (file) {
+      try {
+        const imageUrl = await postImages(file);
+  
+        // Actualizar el estado directamente con la URL de la imagen
+        setFormState((prevState) => ({
+          ...prevState,
+          [fieldToUpdate]: imageUrl,
+        }));
+      } catch (error) {
+        // Manejar el error, por ejemplo, mostrar un mensaje o registrar en la consola
+        console.error('Error al cargar la imagen:', error);
+      }
+    }
+  };
+  
+  console.log(formState);
 
   return (
     <div className='flex h-screen'>
@@ -129,20 +131,34 @@ const RegistroSocio = ({
           <div className='flex flex-wrap gap-4 mt-4'>
             <div className='flex items-center'>
               <strong className='text-xl'>Pasado Judicial</strong>
-              <input type="file" onChange={(event)=> {
-                setImageSelected(event.target.files[0]);
-                }}
+              <input
+                type="file"
+                name='pasadoJudicial'
+                value={pasadoJudicial}
+                onChange={(e) => uploadImage(e, 'pasadoJudicialImg')}
               />
               <BsFillPlusCircleFill className='ml-3 mr-4 text-3xl text-red-socio hover:scale-110' />
             </div>
 
             <div className='flex items-center'>
               <strong className='text-xl'>Licencia</strong>
+              <input
+                type="file"
+                name='licenciaConducir'
+                value={licenciaConducir}
+                onChange={(e) => uploadImage(e, 'licenciaConducir')}
+              />
               <BsFillPlusCircleFill className='ml-3 mr-4 text-3xl text-red-socio hover:scale-110' />
             </div>
 
             <div className='flex items-center'>
               <strong className='text-xl'>Foto</strong>
+              <input
+                type="file"
+                name='foto'
+                value={foto}
+                onChange={(e) => uploadImage(e, 'foto')}
+              />
               <BsFillPlusCircleFill className='ml-3 text-3xl text-red-socio hover:scale-110' />
             </div>
           </div>

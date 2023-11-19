@@ -1,38 +1,29 @@
-import React, { useState, ChangeEvent } from 'react';
-import { Image } from 'cloudinary-react';
+export const postImages = async (file) => {
+  const URL = 'http://localhost:8081/api/file/upload';
 
-const ImageUpload: React.FC = () => {
-  const [image, setImage] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  // Crear un objeto FormData y añadir el archivo
+  const formData = new FormData();
+  formData.append('file', file);
 
-  const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+  try {
+    const resp = await fetch(URL, {
+      method: 'POST',
+      body: formData,
+    });
 
-    if (!file) return;
-
-    setLoading(true);
-
-    // Configura la nube de Cloudinary
-    const cloudName = 'tu-nombre-de-nube';
-    const uploadPreset = 'tu-preset-de-subida';
-
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', uploadPreset);
-
-    try {
-      // Realiza la carga de la imagen a Cloudinary
-      const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
-        method: 'POST',
-        body: formData,
-      });
-
-      const data = await response.json();
-
-      // Almacena la URL de la imagen en el estado
-      setImage(data.secure_url);
-    } catch (error) {
-      console.error('Error al cargar la imagen a Cloudinary:', error);
+    if (!resp.ok) {
+      throw new Error('No se pudo registrar el socio');
     }
-  };
+
+    // Parsear el contenido JSON de la respuesta
+    const respJson = await resp.json();
+
+    // Obtener el valor del campo 'value' del objeto JSON
+    const value = respJson.value;
+    
+    console.log(value);
+    return value;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
