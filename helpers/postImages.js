@@ -21,7 +21,6 @@ export const postImages = async (file) => {
     // Obtener el valor del campo 'value' del objeto JSON
     const value = respJson.value;
     
-    console.log(value);
     return value;
   } catch (error) {
     throw new Error(error.message);

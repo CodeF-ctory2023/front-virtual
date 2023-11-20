@@ -13,8 +13,6 @@ import { MainButtonSocio } from '@/components/GestionSociosComponent/MainButtonS
 import { postSocios } from '@/helpers/postSocios';
 import { postImages } from '@/helpers/postImages';
 
-/* import Swal, { SweetAlertOptions } from 'sweetalert2'; */
-
 interface RegistroSocioProps {
   documentoIdentidad: string;
   nombre: string;
@@ -24,7 +22,15 @@ interface RegistroSocioProps {
   licenciaConducir: string;
   foto: string;
 }
-
+const initialState = {
+  documentoIdentidad: "",
+  nombre: "",
+  correoElectronico: "",
+  telefono: null,
+  pasadoJudicial: "",
+  licenciaConducir: "",
+  foto: "",
+};
 const RegistroSocio = ({
   documentoIdentidad,
   nombre,
@@ -34,27 +40,46 @@ const RegistroSocio = ({
   licenciaConducir,
   foto,
 }: RegistroSocioProps) => {
-  const { onResetForm, onInputChange, formState, setFormState } = useFormInput({
-    nombre: '',
-    correoElectronico: '',
-    telefono: null,
-    documentoIdentidad: '',
-    pasadoJudicial: '',
-    licenciaConducir: '',
-    foto: '',
-  });
+  const { onResetForm, onInputChange, formState, setFormState } = useFormInput(initialState);
 
 
-  const onsubmitForm = async (event: { preventDefault: () => void }) => {
+  /* const onsubmitForm = async (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     postSocios(formState);
-    onResetForm();
-    /* Swal.fire({
-      title: 'Socio registrado con éxito',
-      text: 'Para visualizar los socios visite el listado de socios',
-      icon: 'success',
-    } as SweetAlertOptions); */
+    const { name, value } = event.target;
+    setFormState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  }; */
+
+  const onsubmitForm = async (event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    
+    try {
+      // Primero, actualiza el estado con la información del formulario
+      const { name, value } = event.target;
+      setFormState((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+  
+      // Luego, realiza la llamada a la función asincrónica
+      await postSocios(formState);
+  
+      // Restablece el estado del formulario después de completar la operación asincrónica
+      onResetForm();
+      
+      /* 
+        También puedes agregar cualquier lógica adicional después de completar la operación asincrónica,
+        como mostrar una alerta o navegar a otra página.
+      */
+    } catch (error) {
+      // Manejar errores, si es necesario
+      console.error('Error al enviar el formulario:', error);
+    }
   };
+
   const uploadImage = async (e: ChangeEvent<HTMLInputElement>, fieldToUpdate: string) => {
     const file = e.target.files?.[0];
   
@@ -128,8 +153,8 @@ const RegistroSocio = ({
           {/* <div className='mt-5'>
                         <MainButtonSocio name='Consultar Pasado Judicial' color='#6662D9' onClick={() => { }} />
                     </div> */}
-          <div className='flex flex-wrap gap-4 mt-4'>
-            <div className='flex items-center'>
+          <div className='gap-4 mt-4'>
+            <div className='flex items-center mb-3'>
               <strong className='text-xl'>Pasado Judicial</strong>
               <input
                 type="file"
@@ -140,7 +165,7 @@ const RegistroSocio = ({
               <BsFillPlusCircleFill className='ml-3 mr-4 text-3xl text-red-socio hover:scale-110' />
             </div>
 
-            <div className='flex items-center'>
+            <div className='flex items-center mb-3'>
               <strong className='text-xl'>Licencia</strong>
               <input
                 type="file"
