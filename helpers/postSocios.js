@@ -1,3 +1,6 @@
+import Swal from 'sweetalert2';
+
+
 export const postSocios = async (formData) => {
     const URL = 'http://localhost:8081/api/socio/create';
 
@@ -10,7 +13,20 @@ export const postSocios = async (formData) => {
             body: JSON.stringify(formData),
         });
 
+        if (resp.ok) {
+            Swal.fire({
+                title: 'Socio registrado con éxito',
+                text: 'Para visualizar los socios visite el listado de socios',
+                icon: 'success',
+              });
+        }
+
         if (!resp.ok) {
+            Swal.fire({
+                title: 'No se pudo registrar el socio',
+                text: 'Por favor valide los campos',
+                icon: 'error',
+              });
             throw new Error('No se pudo registrar el socio');
         }
 

@@ -1,6 +1,7 @@
 /* import { Input } from '@/components/GestionSociosComponent/Input'; */
 import { useFormInput } from '@/hooks/useFormInput';
-
+import { ChangeEvent, useState } from "react";
+import { useRouter } from 'next/router';
 //React Icons
 import { HiIdentification } from 'react-icons/hi2';
 import { BsFillPersonFill, BsFillPlusCircleFill } from 'react-icons/bs';
@@ -11,8 +12,7 @@ import { FaPhoneSquareAlt } from 'react-icons/fa';
 import { MainButtonSocio } from '@/components/GestionSociosComponent/MainButtonSocio'; */
 
 import { postSocios } from '@/helpers/postSocios';
-
-import Swal, { SweetAlertOptions } from 'sweetalert2';
+import { postImages } from '@/helpers/postImages';
 
 import { VerticalNavbar } from '@/components/GestionSociosComponent/NavBar';
 
@@ -21,33 +21,73 @@ interface RegistroSocioProps {
   nombre: string;
   correoElectronico: string;
   telefono: number;
-
-  /* onChange: (event: React.ChangeEvent<HTMLInputElement>) => void; */
+  pasadoJudicial: string;
+  licenciaConducir: string;
+  foto: string;
 }
-
+const initialState = {
+  documentoIdentidad: "",
+  nombre: "",
+  correoElectronico: "",
+  telefono: null,
+  pasadoJudicial: "",
+  licenciaConducir: "",
+  foto: "",
+};
 const RegistroSocio = ({
   documentoIdentidad,
   nombre,
   correoElectronico,
   telefono,
+  pasadoJudicial,
+  licenciaConducir,
+  foto,
 }: RegistroSocioProps) => {
-  const { onResetForm, onInputChange, formState } = useFormInput({
-    nombre: '',
-    correoElectronico: '',
-    telefono: null,
-    documentoIdentidad: '',
-  });
+  const { onResetForm, onInputChange, formState, setFormState } = useFormInput(initialState);
 
-  const onsubmitForm = (event: { preventDefault: () => void }) => {
+  const router = useRouter();
+  const onsubmitForm = async (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-    postSocios(formState);
-    onResetForm();
-    Swal.fire({
-      title: 'Socio registrado con éxito',
-      text: 'Para visualizar los socios visite el listado de socios',
-      icon: 'success',
-    } as SweetAlertOptions);
+
+    try {
+      const { name, value } = event.target;
+      setFormState((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+  
+      // Luego, realiza la llamada a la función asincrónica
+      await postSocios(formState);
+  
+      // Restablece el estado del formulario después de completar la operación asincrónica
+      onResetForm();
+      router.push('/tablaSocios');
+    } catch (error) {
+      console.error('Error al enviar el formulario:', error);
+    }
   };
+
+  const uploadImage = async (e: ChangeEvent<HTMLInputElement>, fieldToUpdate: string) => {
+    const file = e.target.files?.[0];
+  
+    // Verificar si hay un archivo seleccionado
+    if (file) {
+      try {
+        const imageUrl = await postImages(file);
+  
+        // Actualizar el estado directamente con la URL de la imagen
+        setFormState((prevState) => ({
+          ...prevState,
+          [fieldToUpdate]: imageUrl,
+        }));
+      } catch (error) {
+        // Manejar el error
+        console.error('Error al cargar la imagen:', error);
+      }
+    }
+  };
+  
+  console.log(formState);
 
   return (
     <>
@@ -102,19 +142,37 @@ const RegistroSocio = ({
           {/* <div className='mt-5'>
                         <MainButtonSocio name='Consultar Pasado Judicial' color='#6662D9' onClick={() => { }} />
                     </div> */}
-          <div className='flex flex-wrap gap-4 mt-4'>
-            <div className='flex items-center'>
+          <div className='gap-4 mt-4'>
+            <div className='flex items-center mb-3'>
               <strong className='text-xl'>Pasado Judicial</strong>
+              <input
+                type="file"
+                name='pasadoJudicial'
+                value={pasadoJudicial}
+                onChange={(e) => uploadImage(e, 'pasadoJudicialImg')}
+              />
               <BsFillPlusCircleFill className='ml-3 mr-4 text-3xl text-red-socio hover:scale-110' />
             </div>
 
-            <div className='flex items-center'>
+            <div className='flex items-center mb-3'>
               <strong className='text-xl'>Licencia</strong>
+              <input
+                type="file"
+                name='licenciaConducir'
+                value={licenciaConducir}
+                onChange={(e) => uploadImage(e, 'licenciaConducir')}
+              />
               <BsFillPlusCircleFill className='ml-3 mr-4 text-3xl text-red-socio hover:scale-110' />
             </div>
 
             <div className='flex items-center'>
               <strong className='text-xl'>Foto</strong>
+              <input
+                type="file"
+                name='foto'
+                value={foto}
+                onChange={(e) => uploadImage(e, 'foto')}
+              />
               <BsFillPlusCircleFill className='ml-3 text-3xl text-red-socio hover:scale-110' />
             </div>
           </div>
