@@ -13,6 +13,7 @@ export const ListadoSocios = ({
   licenciaConducir,
   pasadoJudicial,
   estadoVerificacion }: ListadoSociosProps) => {
+  console.log(pasadoJudicial);
   return (
     <tbody>
       <tr className="even:bg-gray-100">

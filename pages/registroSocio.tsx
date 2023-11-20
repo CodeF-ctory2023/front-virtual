@@ -1,6 +1,7 @@
 /* import { Input } from '@/components/GestionSociosComponent/Input'; */
 import { useFormInput } from '@/hooks/useFormInput';
 import { ChangeEvent, useState } from "react";
+import { useRouter } from 'next/router';
 //React Icons
 import { HiIdentification } from 'react-icons/hi2';
 import { BsFillPersonFill, BsFillPlusCircleFill } from 'react-icons/bs';
@@ -42,22 +43,11 @@ const RegistroSocio = ({
 }: RegistroSocioProps) => {
   const { onResetForm, onInputChange, formState, setFormState } = useFormInput(initialState);
 
-
-  /* const onsubmitForm = async (event: ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    postSocios(formState);
-    const { name, value } = event.target;
-    setFormState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  }; */
-
+  const router = useRouter();
   const onsubmitForm = async (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-    
+
     try {
-      // Primero, actualiza el estado con la información del formulario
       const { name, value } = event.target;
       setFormState((prevState) => ({
         ...prevState,
@@ -69,13 +59,8 @@ const RegistroSocio = ({
   
       // Restablece el estado del formulario después de completar la operación asincrónica
       onResetForm();
-      
-      /* 
-        También puedes agregar cualquier lógica adicional después de completar la operación asincrónica,
-        como mostrar una alerta o navegar a otra página.
-      */
+      router.push('/tablaSocios');
     } catch (error) {
-      // Manejar errores, si es necesario
       console.error('Error al enviar el formulario:', error);
     }
   };
@@ -94,7 +79,7 @@ const RegistroSocio = ({
           [fieldToUpdate]: imageUrl,
         }));
       } catch (error) {
-        // Manejar el error, por ejemplo, mostrar un mensaje o registrar en la consola
+        // Manejar el error
         console.error('Error al cargar la imagen:', error);
       }
     }
