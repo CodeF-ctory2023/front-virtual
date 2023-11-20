@@ -7,7 +7,7 @@ import {
     ChevronRightIcon
 } from "@heroicons/react/24/outline";
 import { Travel } from "@/interfaces/user.interfaces";
-import { addFavSite, updateTravelHistory } from '../services/user.services';
+import { addFavSite, deleteTravel } from '../services/user.services';
 import React from "react";
 
 const Viajes = ({loadTravels, setLoadTravels}: {loadTravels: Travel[], setLoadTravels: React.Dispatch<React.SetStateAction<Travel[]>>}) => {
@@ -51,7 +51,7 @@ const Viajes = ({loadTravels, setLoadTravels}: {loadTravels: Travel[], setLoadTr
         const updatedRows = loadTravels.filter((loadSites) => loadSites.id !== checked.id);
         const newData = updatedRows.map((row, index) => { return { ...row, id: index };})
         try {
-            const response = await updateTravelHistory([])
+            const response = await deleteTravel(updatedRows[0])
             console.log(response)
             if (response === undefined) {
                 setLoadTravels(loadTravels);

@@ -64,30 +64,31 @@ export default function Sitios({loadSites, setLoadSites}: {loadSites: Sites[], s
         });
     }
 
-    const handleSave = (id: Number) => () => {
+    const handleSave = (id: Number) => async () => {
         setModify({
             ...modify,
             isAble: false,
         });
         const newData = loadSites.map((c, i) => {
             if (i === id) {
-              return c = newSite;
+                return c = newSite;
             } else {
-              return c;
+                return c;
             }
         });
-        updateDB(newData)
+        updateDB(newData, {...newSite, id: Number(id)})
+        setLoadSites(newData);
     };
 
     const handleErase = (id: Number, loadSites: Sites[]) => () => {
         const updatedRows = loadSites.filter((loadSites) => loadSites.id !== id);
         const newData = updatedRows.map((row, index) => { return { ...row, id: index };})
-        updateDB(newData)
+        updateDB(newData, updatedRows[0])
     };
 
-    const updateDB = async (newData: Sites[]) => {     
+    const updateDB = async (newData: Sites[], updatedData: Sites) => {     
         try {
-            const response = await updateFavSites(newData)
+            const response = await updateFavSites(updatedData)
             console.log(response)
             if (response === undefined) {
                 setLoadSites(loadSites);

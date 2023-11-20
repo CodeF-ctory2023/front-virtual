@@ -14,6 +14,7 @@ const HistorialViajes = () => {
   const [travels, setTravels] = React.useState(testTravels);
 
   useEffect(() => {
+    const newData: Travel[] = []
     try {
       const response = loadTravelHistory()
       console.log(response)
@@ -22,7 +23,8 @@ const HistorialViajes = () => {
       }
       response
         .then((response) => {
-          setTravels(response);
+          /* Here goes the response answer*/
+          newData.push(response)
         })
         .catch(() => {
           setTravels([]);
@@ -30,6 +32,7 @@ const HistorialViajes = () => {
     } catch (error) {
         console.log("Error: ", error)
     }
+    setTravels(newData);
   }, []);
 
   return (

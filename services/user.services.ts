@@ -43,7 +43,7 @@ export const loadTravelHistory = async () => {
     }
 }
 
-export const updateTravelHistory = async (travels: Travel[]) => {
+export const deleteTravel = async (travels: Travel) => {
 
     try{
          const response = await userApi.post(
@@ -70,7 +70,7 @@ export const loadFavSites = async () => {
     }
 }
 
-export const updateFavSites = async (sites: Sites[]) => {
+export const updateFavSites = async (sites: Sites) => {
 
     try{
          const response = await userApi.post(

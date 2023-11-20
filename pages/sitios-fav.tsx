@@ -15,6 +15,7 @@ const SitiosFavoritos = () => {
   const [sites, setSites] = React.useState(testSites);
 
   useEffect(() => {
+    const newData: Sites[] = []
     try {
       const response = loadFavSites()
       console.log(response)
@@ -23,7 +24,8 @@ const SitiosFavoritos = () => {
       }
       response
         .then((response) => {
-          setSites(response);
+          /* Here goes the response answer*/
+          newData.push(response)
         })
         .catch(() => {
           setSites([]);
@@ -31,6 +33,7 @@ const SitiosFavoritos = () => {
     } catch (error) {
         console.log("Error: ", error)
     }
+    setSites(newData);
   }, []);
 
   const handleAdd = () => {
