@@ -25,12 +25,12 @@ export default function Sitios({loadSites, setLoadSites}: {loadSites: Sites[], s
 
     const [modify, setModify] = React.useState({
         isAble: false,
-        modifyId: 0
+        modifyId: 1
     });
 
     const [newSite, setNewSite] = React.useState({
-        id: 0,
-        imageId: 0,
+        userCode: 0,
+        icon: 0,
         name:  '',
         address:   '',
     });
@@ -46,7 +46,7 @@ export default function Sitios({loadSites, setLoadSites}: {loadSites: Sites[], s
     const handleIcon = (newImage: Number) => () => {
         setNewSite({
             ...newSite,
-            imageId: Number(newImage)
+            icon: Number(newImage)
         });
     };
 
@@ -76,12 +76,12 @@ export default function Sitios({loadSites, setLoadSites}: {loadSites: Sites[], s
                 return c;
             }
         });
-        updateDB(newData, {...newSite, id: Number(id)})
+        updateDB(newData, {...newSite, userCode: Number(1)})
         setLoadSites(newData);
     };
 
     const handleErase = (id: Number, loadSites: Sites[]) => () => {
-        const updatedRows = loadSites.filter((loadSites) => loadSites.id !== id);
+        const updatedRows = loadSites.filter((loadSites) => loadSites.userCode !== id);
         const newData = updatedRows.map((row, index) => { return { ...row, id: index };})
         updateDB(newData, updatedRows[0])
     };
@@ -107,9 +107,9 @@ export default function Sitios({loadSites, setLoadSites}: {loadSites: Sites[], s
                         <details>
                             <summary className="w-[30rem] cursor-pointer flex list-none justify-between"> 
                                 <div className="flex ">
-                                    {modify.isAble === true && modify.modifyId === e.id ?
+                                    {modify.isAble === true && modify.modifyId === e.userCode ?
                                         <div className="inline-block group">
-                                            {icons[newSite.imageId].content}
+                                            {icons[newSite.icon].content}
                                             <div className=" group-hover:block hidden absolute z-1 min-w-[1px] bg-white">
                                                 <button className="block" onClick={handleIcon(0)}>{icons[0].content}</button>
                                                 <button className="block" onClick={handleIcon(1)}>{icons[1].content}</button>
@@ -118,16 +118,16 @@ export default function Sitios({loadSites, setLoadSites}: {loadSites: Sites[], s
                                                 <button className="block" onClick={handleIcon(4)}>{icons[4].content}</button>
                                             </div>
                                       </div>:
-                                        <div> {icons[e.imageId].content} </div>
+                                        <div> {icons[e.icon].content} </div>
                                     }
-                                    {modify.isAble === true && modify.modifyId === e.id ?
+                                    {modify.isAble === true && modify.modifyId === e.userCode ?
                                         <input size={50} onChange={handleOnChange} type="text" value={newSite.name} name="name" className='w-60 apperance-none border-2 border-black text-2xl font-semibold leading-6'/> :
                                         <div className="text-2xl font-semibold leading-6 mt-2"> {e.name}  </div>
                                     }
                                 </div>
-                                {modify.isAble === true && modify.modifyId === e.id ?
+                                {modify.isAble === true && modify.modifyId === e.userCode ?
                                     <div>
-                                        <button className='' onClick={handleSave(e.id)}>
+                                        <button className='' onClick={handleSave(e.userCode)}>
                                             <DocumentCheckIcon className='ml-1 h-8 w-8 mr-2' aria-hidden='true' />
                                         </button> 
                                         <button className='' onClick={handleCancel()}>
@@ -135,16 +135,16 @@ export default function Sitios({loadSites, setLoadSites}: {loadSites: Sites[], s
                                         </button> 
                                     </div>:
                                     <div>
-                                        <button className='' onClick={handleEdit(e.id)}>
+                                        <button className='' onClick={handleEdit(e.userCode)}>
                                             <PencilSquareIcon className='ml-1 mt-1 h-8 w-8 mr-2' aria-hidden='true' />
                                         </button>
-                                        <button className='' onClick={handleErase(e.id, loadSites)}>
+                                        <button className='' onClick={handleErase(e.userCode, loadSites)}>
                                             <TrashIcon className='ml-1 h-8 w-8 mr-2' aria-hidden='true' />
                                         </button>
                                     </div>
                                 }
                             </summary>
-                            {modify.isAble === true && modify.modifyId === e.id ?
+                            {modify.isAble === true && modify.modifyId === e.userCode ?
                                 <input size={50} onChange={handleOnChange} type="text" value={newSite.address} name="address" className='w-60 apperance-none border-2 border-black text-xl font-medium leading-6 mt-4 ml-[4.2rem]'/> :
                                 <div className="text-xl font-medium leading-6 w-auto pt-4 pl-16"> {e.address} </div>
                             }

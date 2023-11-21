@@ -5,9 +5,9 @@ import { useState } from 'react';
 const EditarUsuario = () => {
 
     const [userInfo, setUserInfo] = useState({
-        firstName: "",
+        name: "",
         lastName: "",
-        document: 0,
+        idDocument: 0,
         email: "",
         password: ""
     })
@@ -47,7 +47,7 @@ const EditarUsuario = () => {
                                     <label className="block text-gray-700 text-lg font-bold mb-2">Nombres  </label>
                                 </div>
                                 <div className='sm:col-span-4 justify-center '>
-                                    <input size={50} onChange={handleOnChange} type="text" value={userInfo.firstName} name="firstNames" className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' placeholder='nombre ' />
+                                    <input size={50} onChange={handleOnChange} type="text" value={userInfo.name} name="names" className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' placeholder='nombre ' />
                                 </div>
                             </div>
                         </div>
@@ -67,7 +67,7 @@ const EditarUsuario = () => {
                                     <label className="block text-gray-700 text-lg font-bold mb-2">Identificacion</label>
                                 </div>
                                 <div className='sm:col-span-4 justify-center '>
-                                    <input size={50} onChange={handleOnChange} type="text" value={userInfo.document} name="document" className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ' placeholder='documento' />
+                                    <input size={50} onChange={handleOnChange} type="text" value={userInfo.idDocument} name="idDocument" className='text-center shadow apperance-none border rounded-lg  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ' placeholder='documento' />
                                 </div>
                             </div>
                         </div>

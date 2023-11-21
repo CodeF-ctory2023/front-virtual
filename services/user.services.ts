@@ -61,7 +61,7 @@ export const loadFavSites = async () => {
 
     try{
          const response = await userApi.get(
-            'get fav sites info address here'
+            'sites/byUser/1'
         )
         /* const response = userList[1] */
         return response.data

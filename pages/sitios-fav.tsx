@@ -38,8 +38,8 @@ const SitiosFavoritos = () => {
 
   const handleAdd = () => {
     const newSite: Sites = {
-      id: sites.length,
-      imageId: 0,
+      userCode: sites.length,
+      icon: 0,
       name:  '',
       address:   '',
     }
