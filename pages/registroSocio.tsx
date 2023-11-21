@@ -1,15 +1,11 @@
-/* import { Input } from '@/components/GestionSociosComponent/Input'; */
 import { useFormInput } from '@/hooks/useFormInput';
-import { ChangeEvent, useState } from "react";
-import { useRouter } from 'next/router';
+import { ChangeEvent } from "react";
 //React Icons
 import { HiIdentification } from 'react-icons/hi2';
 import { BsFillPersonFill, BsFillPlusCircleFill } from 'react-icons/bs';
 import { MdEmail } from 'react-icons/md';
 import { FaPhoneSquareAlt } from 'react-icons/fa';
 
-/* //Componentes
-import { MainButtonSocio } from '@/components/GestionSociosComponent/MainButtonSocio'; */
 
 import { postSocios } from '@/helpers/postSocios';
 import { postImages } from '@/helpers/postImages';
@@ -45,7 +41,6 @@ const RegistroSocio = ({
 }: RegistroSocioProps) => {
   const { onResetForm, onInputChange, formState, setFormState } = useFormInput(initialState);
 
-  const router = useRouter();
   const onsubmitForm = async (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
 
@@ -61,7 +56,6 @@ const RegistroSocio = ({
   
       // Restablece el estado del formulario después de completar la operación asincrónica
       onResetForm();
-      router.push('/tablaSocios');
     } catch (error) {
       console.error('Error al enviar el formulario:', error);
     }
@@ -86,8 +80,6 @@ const RegistroSocio = ({
       }
     }
   };
-  
-  console.log(formState);
 
   return (
     <>
@@ -149,7 +141,7 @@ const RegistroSocio = ({
                 type="file"
                 name='pasadoJudicial'
                 value={pasadoJudicial}
-                onChange={(e) => uploadImage(e, 'pasadoJudicialImg')}
+                onChange={(e) => uploadImage(e, 'pasadoJudicial')}
               />
               <BsFillPlusCircleFill className='ml-3 mr-4 text-3xl text-red-socio hover:scale-110' />
             </div>

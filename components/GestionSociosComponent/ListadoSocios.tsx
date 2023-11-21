@@ -1,3 +1,7 @@
+import { getSocioByCedula } from '@/helpers/getSocioByCedula';
+import { useRouter } from 'next/router';
+import { useUser } from '@/context/UserContext';
+
 interface ListadoSociosProps {
   documentoIdentidad: number;
   nombre: string;
@@ -13,7 +17,16 @@ export const ListadoSocios = ({
   licenciaConducir,
   pasadoJudicial,
   estadoVerificacion }: ListadoSociosProps) => {
-  console.log(pasadoJudicial);
+
+  const { user, setUser } = useUser();
+  const router = useRouter();
+
+  const verDetalleSocio = async () => {
+    const socio = await getSocioByCedula(documentoIdentidad);
+    setUser(socio);
+
+    router.push(`/nombreSocio`);
+  }
   return (
     <tbody>
       <tr className="even:bg-gray-100">
@@ -37,7 +50,9 @@ export const ListadoSocios = ({
         </td>
         <td className="px-6 py-4 whitespace-no-wrap">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            onClick={verDetalleSocio}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
             Ver Detalles
           </button>
         </td>

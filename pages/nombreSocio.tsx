@@ -1,18 +1,29 @@
 import { HiIdentification } from 'react-icons/hi2';
 import { BsFillPersonFill } from 'react-icons/bs';
-import { MdEmail, MdLocationCity } from 'react-icons/md';
+import { MdEmail } from 'react-icons/md';
 import { FaPhoneSquareAlt } from 'react-icons/fa';
 import { ButtonSocios } from '@/components/GestionSociosComponent/ButtonSocios';
 import { Dialog } from '@/components/GestionSociosComponent/dialog';
 import { VentEmergente } from '@/components/GestionSociosComponent/ventEmergente';
 import { useModal } from '@/hooks/useModal';
 import { VerticalNavbar } from '@/components/GestionSociosComponent/NavBar';
+import { useUser } from '@/context/UserContext';
 
 const NombreSocio: React.FC = () => {
 
   const [isOpenModal1, openModal1, closeModal1] = useModal(false);
   const [isOpenModal2, openModal2, closeModal2] = useModal(false); 
-
+  const { user, setUser } = useUser();
+  const {
+    documentoIdentidad,
+    nombre,
+    correoElectronico,
+    telefono,
+    licenciaConducir,
+    pasadoJudicial,
+    foto
+  } = user[0];
+  console.log(user);
   return (
     <>
     <VerticalNavbar />
@@ -48,6 +59,7 @@ const NombreSocio: React.FC = () => {
                   id='cedula'
                   className='border-solid border-2 border-neutral-200'
                   disabled={true}
+                  value={documentoIdentidad}
                 />
                 <label
                   htmlFor='cedula'
@@ -66,6 +78,7 @@ const NombreSocio: React.FC = () => {
                   id='name'
                   className='border-solid border-2 border-neutral-200'
                   disabled={true}
+                  value={nombre}
                 />
                 <label
                   htmlFor='name'
@@ -81,12 +94,13 @@ const NombreSocio: React.FC = () => {
               <div className='relative w-[110%]'>
                 <input
                   type='text'
-                  id='cedula'
+                  id='correo'
                   className='border-solid border-2 border-neutral-200'
                   disabled={true}
+                  value={correoElectronico}
                 />
                 <label
-                  htmlFor='cedula'
+                  htmlFor='correo'
                   className='absolute top-0 left-2 -mt-2 text-black-600 px-1 '
                 >
                   Correo electrónico
@@ -99,35 +113,18 @@ const NombreSocio: React.FC = () => {
               <div className='relative w-[110%]'>
                 <input
                   type='text'
-                  id='cedula'
+                  id='telefono'
                   className='border-solid border-2 border-neutral-200'
                   disabled={true}
+                  value={telefono}
                 />
                 <label
-                  htmlFor='cedula'
+                  htmlFor='telefono'
                   className='absolute top-0 left-2 -mt-2 text-black-600 px-1 '
                 >
                   Teléfono
                 </label>
                 {/* <p>{newSocios.telefono}</p> */}
-              </div>
-            </div>
-            <div className='flex w-[160%]'>
-              <MdLocationCity className='mr-3 text-3xl text-green-socio' />
-              <div className='relative w-[110%]'>
-                <input
-                  type='text'
-                  id='cedula'
-                  className='border-solid border-2 border-neutral-200'
-                  disabled={true}
-                />
-                <label
-                  htmlFor='cedula'
-                  className='absolute top-0 left-2 -mt-2 text-black-600 px-1 '
-                >
-                  Ciudad de Servicio
-                </label>
-                {/* <p>{newSocios.ciudad_de_servicio}</p> */}
               </div>
             </div>
             <div className="mt-20 p-2 pr-20 flex flex-row-reverse">
