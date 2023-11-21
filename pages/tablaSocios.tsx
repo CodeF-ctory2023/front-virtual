@@ -47,7 +47,7 @@ const TablaSocios: React.FC = () => {
             </thead>
 
             {socios.map((socio) => (
-              <ListadoSocios key={socio.id} {...socio} />
+              <ListadoSocios key={socio.id} {...socio}/>
             ))}
           </table>
         </div>
